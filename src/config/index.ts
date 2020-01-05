@@ -4,4 +4,4 @@ import local from './local';
 export default {
     ...common,
     ...local,
-}
+};

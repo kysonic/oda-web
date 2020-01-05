@@ -1,0 +1,39 @@
+{
+  "extends": ["airbnb", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "import/no-extraneous-dependencies": [2, { "devDependencies": ["**/test.tsx", "**/test.ts"] }],
+    "indent": "off",
+    "@typescript-eslint/indent": [2, 4],
+    "react/jsx-indent": [2, 4],
+    "react/jsx-indent-props": [2, 4],
+    "import/extensions": 0,
+    "no-unused-expressions": 0,
+    "max-len": [2, 180],
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "object-curly-newline": 0,
+    "comma-dangle": ["warn", {
+      "arrays": "never",
+      "objects": "always",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+    }],
+    "jsx-a11y/anchor-is-valid": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
