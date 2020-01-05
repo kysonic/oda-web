@@ -1,0 +1,3 @@
+./src/config/local.ts
+node_modules
+.next
