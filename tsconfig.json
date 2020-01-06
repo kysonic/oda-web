@@ -21,8 +21,8 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@config/*": ["./src/config/*"],
-      "@pages/*": ["./pages/*"],
-      "@services/*": ["./services/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@services/*": ["./src/services/*"],
       "@stores/*": ["./src/store/*"],
       "@themes/*": ["./src/themes/*"],
       "@utils/*": ["./src/utils/*"]
