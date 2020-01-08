@@ -4,10 +4,9 @@ import { NextComponentType, NextPageContext } from 'next/types';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '@themes/default';
-import { toJS } from 'mobx';
-import { AppStore } from '@stores/app';
 import nextCookie from 'next-cookies';
 import config from '@config/index';
+import { initStores, applyStoresInitialState } from '@services/next-mobx';
 
 type OdaWebAppPropsType = NextComponentType & {initialState: any};
 
@@ -19,13 +18,10 @@ export type NextInitialPropsType = {
 export default class OdaWebApp extends App<OdaWebAppPropsType> {
     static async getInitialProps({ Component, ctx }: NextInitialPropsType): Promise<any> {
         let pageProps = {};
-        const appStore = AppStore();
 
         const token = nextCookie(ctx)[config.app?.tokenName];
 
-        if (typeof appStore.fetch === 'function') {
-            await appStore.fetch(token);
-        }
+        const initialState = await initStores({ token });
 
         if (Component.getInitialProps) {
             pageProps = await Component.getInitialProps(ctx);
@@ -36,19 +32,19 @@ export default class OdaWebApp extends App<OdaWebAppPropsType> {
             baseUrl = `http://${ctx.req.headers.host}`;
         }
 
-        const initialState = toJS(appStore);
-
-        return { pageProps, initialState, baseUrl };
+        return { pageProps, baseUrl, initialState };
     }
 
     componentDidMount(): void {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
         jssStyles?.parentElement?.removeChild(jssStyles);
+        // Setup client initial state
+        applyStoresInitialState(this.props.initialState);
     }
 
     render() {
-        const { Component, pageProps, } = this.props;
+        const { Component, pageProps } = this.props;
 
         return (
             <>

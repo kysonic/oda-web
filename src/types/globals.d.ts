@@ -19,3 +19,9 @@ export type GraphQLResponse = {
         errors: Array<GraphQlError>;
     };
 }
+
+// MOBX
+
+export type FetchPayload = {
+    token?: string;
+}
