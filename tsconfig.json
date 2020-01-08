@@ -19,18 +19,21 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "strictFunctionTypes": false,
+    "noImplicitAny": false,
     "paths": {
       "@components/*": ["./src/components/*"],
       "@config/*": ["./src/config/*"],
       "@pages/*": ["./src/pages/*"],
       "@services/*": ["./src/services/*"],
-      "@stores/*": ["./src/store/*"],
+      "@stores/*": ["./src/stores/*"],
       "@themes/*": ["./src/themes/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/types/schema.d.ts"
   ],
   "include": [
     "next-env.d.ts",

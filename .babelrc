@@ -12,7 +12,8 @@
           "@services": "./src/services",
           "@stores": "./src/stores",
           "@themes": "./src/themes",
-          "@utils": "./src/utils"
+          "@utils": "./src/utils",
+          "@types": "./src/types"
         },
         "extensions": [".js", ".jsx", ".tsx"]
       }

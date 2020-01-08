@@ -1,5 +1,6 @@
+import axios from 'axios';
 import config from '@config/index';
-import { GraphQLResponse } from '../globals';
+import { GraphQLResponse } from '../types/globals';
 
 export type GraphQlServiceHeadersType = {
     Accept?: string;
@@ -12,26 +13,24 @@ const DEFAULT_HEADERS = {
     'Content-Type': 'application/json',
 };
 
-export async function commitOperation(query: string, variables?: Record<string, any>): Promise<GraphQLResponse> {
+export async function commitOperation(query: string, variables?: Record<string, any> | null, token?: string): Promise<GraphQLResponse> {
     const headers: GraphQlServiceHeadersType = {};
 
-    if (localStorage.get(config.app?.localStorage?.tokenName)) {
-        headers.Authorization = `Bearer ${localStorage.get(config.app?.localStorage?.tokenName)}`;
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
     }
 
-    const response = await fetch(config.app.baseUrl, {
-        method: 'POST',
+    const response = await axios.post(config.app.baseUrl, { query, variables }, {
         headers: Object.assign(DEFAULT_HEADERS, headers),
-        body: JSON.stringify({ query, variables }),
     });
 
-    return response.json();
+    return response.data;
 }
 
-export async function commitQuery(query: string): Promise<GraphQLResponse> {
-    return commitOperation(query);
+export async function commitQuery(query: string, token?: string): Promise<GraphQLResponse> {
+    return commitOperation(query, null, token);
 }
 
-export async function commitMutation(query: string, variables: Record<string, any>): Promise<GraphQLResponse> {
-    return commitOperation(query, variables);
+export async function commitMutation(query: string, variables: Record<string, any>, token?: string): Promise<GraphQLResponse> {
+    return commitOperation(query, variables, token);
 }
