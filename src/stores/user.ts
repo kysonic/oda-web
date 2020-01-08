@@ -1,7 +1,7 @@
 import { observable, flow } from 'mobx';
 import { BaseStore } from '@stores/base';
 import { commitQuery } from '@services/graphql';
-import { FetchPayload } from 'globals';
+import { FetchPayload, User } from 'globals';
 
 const MY_USER_QUERY = `
 query {
@@ -22,7 +22,7 @@ query {
 
 
 export class UserStore extends BaseStore {
-    @observable user = null;
+    @observable user: User = null;
 
     fetch = flow(function* fetch(this: UserStore & BaseStore, payload?: FetchPayload) {
         try {

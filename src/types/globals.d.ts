@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
-import './schema';
+
+export * from './schema';
 
 // GRAPHQL
 
