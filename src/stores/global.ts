@@ -1,5 +1,5 @@
-import { UserStore } from './user';
+import userStore from './user';
 
 export default {
-    userStore: new UserStore(),
+    userStore,
 };

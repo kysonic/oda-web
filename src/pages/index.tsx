@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import Signup from '@components/auth/Signup';
-import globalStore from '@stores/global';
 
-const Home: NextPage = () => {
-    useEffect(() => {
-        console.log(globalStore.userStore);
-    }, []);
-
+const Home: NextPage = (props) => {
     return (
         <Signup />
     );
