@@ -2,6 +2,12 @@ import '@testing-library/jest-dom/extend-expect';
 
 export * from './schema';
 
+// REACT
+
+export type ClassNameType = {
+    className?: string;
+}
+
 // GRAPHQL
 
 export type GraphQlErrorLocation = {
