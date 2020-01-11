@@ -12,13 +12,13 @@ export type DefaultLayoutPropsType = {
 export default function DefaultLayout({ children }: DefaultLayoutPropsType) {
     return (
         <Container className="l-default" fluid>
-            <Header />
-            <Row>
-                <Col>
+            <Header className="l-default__header" />
+            <Row className="l-default__content">
+                <Col className="l-default__content-col">
                     {children}
                 </Col>
             </Row>
-            <Footer />
+            <Footer className="l-default__footer" />
         </Container>
     );
 }

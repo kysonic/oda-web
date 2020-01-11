@@ -1,24 +1,12 @@
 import React from 'react';
 import { UncontrolledCollapse, Navbar, Row, Col } from 'reactstrap';
-import Link from 'next/link';
 import Navigation from '@components/navigation/Navigation';
 import UserMenu from '@components/auth/UserMenu';
 import * as classNames from 'classnames';
 import { ClassNameType } from 'globals';
+import Logo from '@components/ui/logo/Logo';
 
 import './Header.scss';
-
-export type HeaderLogoPropsType = {} & ClassNameType
-
-export function HeaderLogo({ className }: HeaderLogoPropsType) {
-    return (
-        <Link href="/">
-            <a className={classNames('c-header-logo', 'mr-lg-5', className)} title="Home">
-                <img alt="ODA WEB" src="img/logo.jpg" />
-            </a>
-        </Link>
-    );
-}
 
 export type HeaderCollapseHeaderPropsType = {} & ClassNameType
 
@@ -40,12 +28,14 @@ function HeaderCollapseHeader({ className }: HeaderCollapseHeaderPropsType) {
     );
 }
 
-export default function Header() {
+export type HeaderPropsType = {} & ClassNameType;
+
+export default function Header({ className }: HeaderPropsType) {
     return (
-        <Row className="c-header">
+        <Row className={classNames('c-header', className)}>
             <Col className="c-header__col">
                 <Navbar className="c-header__navbar navbar-main navbar-light" expand="lg">
-                    <HeaderLogo className="c-header__logo" />
+                    <Logo className="c-header__logo" />
                     <button type="button" className="c-header__burger navbar-toggler" id="toggler">
                         <i className="ni ni-bold-down" />
                     </button>
