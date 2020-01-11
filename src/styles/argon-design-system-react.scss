@@ -1,0 +1,105 @@
+/*!
+
+=========================================================
+* Argon Design System React - v1.0.0 based on Argon Design System - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-design-system-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
+
+* Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+// Core
+
+@import "bootstrap/functions";
+@import "argon/functions";
+
+@import "argon/variables";
+@import "bootstrap/variables";
+
+@import "bootstrap/mixins";
+@import "argon/mixins";
+
+// Bootstrap components
+
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/images";
+@import "bootstrap/code";
+@import "bootstrap/grid";
+@import "bootstrap/tables";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
+@import "bootstrap/transitions";
+@import "bootstrap/dropdown";
+@import "bootstrap/button-group";
+@import "bootstrap/input-group";
+@import "bootstrap/custom-forms";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/card";
+@import "bootstrap/breadcrumb";
+@import "bootstrap/pagination";
+@import "bootstrap/badge";
+@import "bootstrap/jumbotron";
+@import "bootstrap/alert";
+@import "bootstrap/progress";
+@import "bootstrap/media";
+@import "bootstrap/list-group";
+@import "bootstrap/close";
+@import "bootstrap/modal";
+@import "bootstrap/tooltip";
+@import "bootstrap/popover";
+@import "bootstrap/carousel";
+@import "bootstrap/utilities";
+@import "bootstrap/print";
+
+// argon components
+
+@import "argon/reboot.scss";
+@import "argon/global.scss";
+@import "argon/utilities.scss";
+
+@import "argon/accordion.scss";
+@import "argon/alerts.scss";
+@import "argon/avatars.scss";
+@import "argon/badge.scss";
+@import "argon/buttons.scss";
+@import "argon/card.scss";
+@import "argon/carousel.scss";
+@import "argon/close.scss";
+@import "argon/custom-forms.scss";
+@import "argon/dropdown.scss";
+@import "argon/footer.scss";
+@import "argon/forms.scss";
+@import "argon/grid.scss";
+@import "argon/icons.scss";
+@import "argon/input-group.scss";
+@import "argon/list-group.scss";
+@import "argon/modal.scss";
+@import "argon/nav.scss";
+@import "argon/navbar.scss";
+@import "argon/pagination.scss";
+@import "argon/popover.scss";
+@import "argon/progress.scss";
+@import "argon/section.scss";
+@import "argon/separator.scss";
+@import "argon/type.scss";
+
+// Vendor
+
+@import "argon/vendor/bootstrap-datepicker.scss";
+@import "argon/vendor/headroom.scss";
+@import "argon/vendor/nouislider.scss";
+
+// React differences
+
+@import "argon/react/react-differences.scss";
