@@ -6,7 +6,7 @@ import config from '@config/index';
 import { initStores, applyStoresInitialState } from '@services/next-mobx';
 import DefaultLayout from '@components/layouts/default/DefaultLayout';
 
-import '@styles/argon-design-system.scss';
+import '@styles/argon-design-system.global.scss';
 
 type OdaWebAppPropsType = NextComponentType & {initialState: any};
 

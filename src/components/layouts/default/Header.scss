@@ -1,5 +1,9 @@
-$header-background-color: $primary;
+$header-background-color: $white;
+$header-padding: 0.2rem 0;
 
 .c-header {
   background-color: $header-background-color;
+  padding: $header-padding;
+
+
 }

@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = withSass({
     webpack(config) {
         config.resolve.modules.push(__dirname);
-        config.resolve.extensions.push('.ts', '.tsx');
+        config.resolve.extensions.push('.ts', '.tsx', '.css', '.scss');
         return config;
     },
     sassLoaderOptions: {
