@@ -5,6 +5,7 @@
         font-weight: $navbar-nav-link-font-weight;
         text-transform: $navbar-nav-link-text-transform;
         letter-spacing: $navbar-nav-link-letter-spacing;
+        cursor: pointer;
         @include transition($navbar-transition);
 
         .nav-link-inner--text {
@@ -68,7 +69,6 @@
             padding-top: $navbar-nav-link-padding-y;
             padding-bottom: $navbar-nav-link-padding-y;
             border-radius: $navbar-nav-link-border-radius;
-            cursor: pointer;
 
             i {
                 margin-right: .625rem;
@@ -152,6 +152,8 @@
         .dropdown-menu-inner {
             position: relative;
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
         }
     }
 }
