@@ -28,6 +28,7 @@ export default class OdaWebApp extends App<OdaWebAppPropsType> {
         }
 
         let baseUrl = '';
+
         if (ctx.req) {
             baseUrl = `http://${ctx.req.headers.host}`;
         }

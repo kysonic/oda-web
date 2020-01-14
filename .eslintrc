@@ -29,12 +29,17 @@
     "@typescript-eslint/explicit-function-return-type": 0,
     "object-curly-newline": 0,
     "no-param-reassign": 0,
-    "comma-dangle": ["warn", {
-      "arrays": "never",
-      "objects": "always",
-      "imports": "never",
-      "exports": "never",
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
       "functions": "never"
+    }],
+    "padding-line-between-statements": ["error", {
+      "blankLine": "always",
+      "prev": ["const", "let", "var"],
+      "next": ["return", "block-like", "multiline-expression", "multiline-block-like", "multiline-const"]
     }],
     "jsx-a11y/anchor-is-valid": 0
   },
