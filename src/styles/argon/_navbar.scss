@@ -5,6 +5,7 @@
         font-weight: $navbar-nav-link-font-weight;
         text-transform: $navbar-nav-link-text-transform;
         letter-spacing: $navbar-nav-link-letter-spacing;
+        cursor: pointer;
         @include transition($navbar-transition);
 
         .nav-link-inner--text {
@@ -85,9 +86,9 @@
             }
         }
 
-        // Dropdown menu 
+        // Dropdown menu
         .dropdown-menu {
-            opacity: 0; 
+            opacity: 0;
             pointer-events: none;
             margin: 0;
 
@@ -131,7 +132,7 @@
 
         &.navbar-nav-hover {
             .dropdown-menu {
-                opacity: 0; 
+                opacity: 0;
                 display: block;
                 pointer-events: none;
                 transform: translate(0, 10px) perspective(200px) rotateX(-2deg);
@@ -147,10 +148,12 @@
                 animation: none;
             }
         }
-        
+
         .dropdown-menu-inner {
             position: relative;
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
         }
     }
 }
@@ -202,7 +205,7 @@
         }
 
         .navbar-brand {
-            color: $navbar-dark-color; 
+            color: $navbar-dark-color;
 
             @include hover-focus {
                 color: $navbar-dark-color;
@@ -235,8 +238,8 @@
             }
         }
     }
-    
-    .navbar-collapse {     
+
+    .navbar-collapse {
         width: calc(100% - 1.4rem);
         position: absolute;
         top: 0;
@@ -288,7 +291,7 @@
             }
         }
 
-        .collapse-close { 
+        .collapse-close {
             text-align: right;
         }
     }
@@ -319,7 +322,7 @@
     100% {
         opacity: 1;
         transform: scale(1);
-    } 
+    }
 }
 
 @keyframes hide-navbar-collapse {
@@ -332,7 +335,7 @@
     to {
         opacity: 0;
         transform: scale(.95);
-    } 
+    }
 }
 
 @keyframes show-navbar-dropdown {
@@ -345,7 +348,7 @@
     100% {
         transform: translate(0, 0);
         opacity: 1;
-    } 
+    }
 }
 
 @keyframes hide-navbar-dropdown {
@@ -356,5 +359,5 @@
     to {
         opacity: 0;
         transform: translate(0, 10px);
-    } 
+    }
 }
