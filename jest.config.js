@@ -1,11 +1,11 @@
 module.exports = {
     preset: 'ts-jest',
     roots: [
-        '<rootDir>/src'
+        '<rootDir>/src',
     ],
     testMatch: [
         '**/__tests__/**/*.+(ts|tsx|js)',
-        '**/?(*.)+(spec|test).+(ts|tsx|js)'
+        '**/?(*.)+(spec|test).+(ts|tsx|js)',
     ],
     transform: {
         '^.+\\.(ts|tsx)$': 'babel-jest',
@@ -24,6 +24,6 @@ module.exports = {
         'ts',
         'tsx',
         'js',
-        'json'
+        'json',
     ],
 };
