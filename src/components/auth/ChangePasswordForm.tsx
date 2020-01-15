@@ -1,32 +1,25 @@
 import React, { useCallback } from 'react';
-import {
-    FormGroup,
-    Form,
-    Input,
-    InputGroup,
-    Button,
-    Row,
-    Col,
-} from 'reactstrap';
-import useForm, { formConfigType } from './useForm';
+import { FormGroup, Form, Input, InputGroup, Button, Row, Col } from 'reactstrap';
+import useForm, { FormConfigType } from '../hooks/useForm';
 
-const initialFormState: formConfig = {
+const initialFormState: FormConfigType = {
     password: {
-        value: '',
-        validateErrors: {},
-        type: 'password',
+        type: 'text',
+        name: 'password',
         placeholder: 'Enter your password',
+        validation: 'password',
     },
-    confirm: {
-        value: '',
-        validateErrors: {},
-        type: 'password',
+    confirmPassword: {
+        type: 'text',
+        name: 'confirmPassword',
         placeholder: 'Confirm your password',
+        validation: 'password',
     },
 };
 
 export default function ChangePasswordForm() {
-    const [formData, onChange]: [formConfigType, fn] = useForm(initialFormState);
+    const [formData, onChange] = useForm(initialFormState);
+
     const onSubmit = useCallback((e) => {
         // submit
     }, [formData]);
