@@ -47,3 +47,7 @@ export type FieldType = {
     validation?: string;
     required?: boolean;
 }
+
+export type FieldsType = {
+    [key: string]: FieldType;
+};

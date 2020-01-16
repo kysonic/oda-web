@@ -1,55 +1,35 @@
-import React, { useCallback } from 'react';
-import { FormGroup, Form, Input, InputGroup, Button, Row, Col } from 'reactstrap';
-import useForm, { FormConfigType } from '../hooks/useForm';
+import React from 'react';
+import FormFactory from '@components/form/Form';
+import { FieldsType } from 'globals';
 
-const initialFormState: FormConfigType = {
+const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
     password: {
         type: 'text',
         name: 'password',
+        fieldType: 'password',
         placeholder: 'Enter your password',
         validation: 'password',
+        required: true,
     },
     confirmPassword: {
         type: 'text',
         name: 'confirmPassword',
+        fieldType: 'password',
         placeholder: 'Confirm your password',
         validation: 'password',
+        required: true,
     },
 };
 
 export default function ChangePasswordForm() {
-    const [formData, onChange] = useForm(initialFormState);
-
-    const onSubmit = useCallback((e) => {
-        // submit
-    }, [formData]);
+    const onSubmit = (values, errors) => {
+        console.log('Submit', values, errors);
+    };
 
     return (
-        <Form>
-            {Object.entries(formData).map(([name, data]) => (
-                <Row>
-                    <Col md="12">
-                        <FormGroup>
-                            <InputGroup className="input-group-alternative mb-4">
-                                <Input
-                                    name={name}
-                                    value={data.value}
-                                    type={data.type}
-                                    placeholder={data.placeholder}
-                                    onChange={onChange}
-                                />
-                            </InputGroup>
-                        </FormGroup>
-                    </Col>
-                </Row>
-            ))}
-            <Row>
-                <Col md="12">
-                    <Button onClick={onSubmit} color="primary" type="button">
-                        Change password
-                    </Button>
-                </Col>
-            </Row>
-        </Form>
+        <FormFactory
+            fields={CHANGE_PASSWORD_FORM_FIELDS}
+            onSubmit={onSubmit}
+        />
     );
 }

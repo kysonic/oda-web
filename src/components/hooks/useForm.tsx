@@ -6,12 +6,15 @@ export type FormConfigType = {
     [key: string]: FieldType;
 }
 
-export type useFormReturnType = [FormConfigType, useCallbackType, useCallbackType];
+export type errorsType = {
+    [key: string]: Array<string>;
+}
+
+export type useFormReturnType = [FormConfigType, useCallbackType, useCallbackType, errorsType];
 
 export default function useForm(initialState: FormConfigType, submitCallback?: useCallbackType): useFormReturnType {
     const [formData, setFormData] = useState(initialState);
     const validationSchema = useMemo(() => buildValidationSchema(initialState), [initialState]);
-    console.log(validationSchema);
     const [errors, setErrors] = useState({});
 
     const onChange = useCallback((event) => {
@@ -26,13 +29,38 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         });
     }, [formData]);
 
-    const onSubmit = useCallback((event) => {
+    const isValid = async () => {
+        try {
+            await validationSchema.validate(formData, { abortEarly: false });
+            setErrors({});
+
+            return true;
+        } catch (err) {
+            const yupErrors = {};
+
+            err.inner.forEach((error) => {
+                const name = error.path.replace('.value', '');
+                yupErrors[name] = error.errors;
+            });
+
+            setErrors({
+                ...errors,
+                ...yupErrors,
+            });
+
+            return false;
+        }
+    };
+
+    const onSubmit = useCallback(async (event) => {
         event.preventDefault();
 
-        if (submitCallback) {
-            submitCallback();
-        }
-    }, []);
+        const isFormValid = await isValid();
 
-    return [formData, onChange, onSubmit];
+        if (isFormValid) {
+            submitCallback(formData, errors);
+        }
+    }, [formData]);
+
+    return [formData, onChange, onSubmit, errors];
 }
