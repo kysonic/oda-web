@@ -54,3 +54,16 @@ export function pick(target: Record<string, any>, props: Array<string>): Record<
         return acc;
     }, {});
 }
+
+/**
+ * Map object
+ * @param obj - entry object
+ * @param fn - callback to map
+ */
+export function map(obj: Record<string, any>, fn: Function): Record<string, any> {
+    return Object.fromEntries(
+        Object.entries(obj).map(
+            ([k, v], i) => [k, fn(v, k, i)]
+        )
+    );
+}

@@ -8,6 +8,8 @@ export type ClassNameType = {
     className?: string;
 }
 
+export type useCallbackType = (event: any) => void;
+
 // GRAPHQL
 
 export type GraphQlErrorLocation = {
@@ -32,3 +34,20 @@ export type GraphQLResponse = {
 export type FetchPayload = {
     token?: string;
 }
+
+// FORM
+
+export type FieldType = {
+    type: string;
+    name: string;
+    value?: string | number;
+    fieldType?: string; // input type={fieldType}
+    label?: string;
+    placeholder?: string;
+    validation?: string;
+    required?: boolean;
+}
+
+export type FieldsType = {
+    [key: string]: FieldType;
+};
