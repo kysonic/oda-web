@@ -13,6 +13,7 @@ class MyDocument extends Document {
             <Html>
                 <Head>
                     <link rel="stylesheet" href="/nucleo/css/nucleo.css" />
+                    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,800,900&display=swap" rel="stylesheet" />
                 </Head>
                 <body>
                     <Main />

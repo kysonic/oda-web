@@ -16,6 +16,6 @@ export async function initStores(payload?: FetchPayload): Promise<Record<string,
 
 export function applyStoresInitialState(initialState): void {
     Object.keys(stores).forEach((storeName: string) => {
-         stores[storeName]?.applyInitialState(initialState?.stores[storeName]);
+         stores[storeName]?.applyInitialState?.(initialState?.stores[storeName]);
     });
 }
