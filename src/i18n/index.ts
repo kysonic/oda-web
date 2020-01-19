@@ -11,5 +11,5 @@ const languages = {
 export default languages;
 
 export function translate(code) {
-    return languages[globalStore.appStore.strippedLanguage]?.[code];
+    return languages[globalStore.appStore.strippedLanguage]?.[code] || code;
 }

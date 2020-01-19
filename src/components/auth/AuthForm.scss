@@ -1,0 +1,25 @@
+$auth-form-title-size: 52px;
+$auth-form-title-size-xs: 26px;
+$auth-form-margin-top: 60px;
+$auth-form-forgot-password-margin-top: 44px;
+
+.c-auth-form {
+  padding: 24px;
+
+  &__title {
+    font-size: $auth-form-title-size;
+
+    @include media-breakpoint-down(sm) {
+      font-size: $auth-form-title-size-xs;
+    }
+  }
+
+  &__form {
+    margin-top: $auth-form-margin-top;
+  }
+
+  &__forgot-password {
+    margin-top: $auth-form-forgot-password-margin-top;
+  }
+}
+

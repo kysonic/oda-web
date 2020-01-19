@@ -64,6 +64,7 @@
     "husky": "^4.0.7",
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
+    "postcss-pxtorem": "^4.0.1",
     "prettier": "^1.19.1",
     "react-hot-loader": "^4.12.18",
     "react-testing-library": "^8.0.1",

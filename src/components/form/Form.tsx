@@ -1,8 +1,9 @@
 import React, { RefObject } from 'react';
 import { Form, Button } from 'reactstrap';
 import { capitalizeFirst } from '@utils/string';
-import { FieldType, FieldsType } from 'globals';
+import { FieldType, FieldsType, ClassNameType } from 'globals';
 import useFrom from '@components/hooks/useForm';
+import { translate } from '@i18n/index';
 import Fields from './fields';
 
 type FieldPropsType = {} & FieldType;
@@ -18,10 +19,11 @@ export function Field(props: FieldPropsType) {
 export type FormPropsType = {
     fields: FieldsType;
     onSubmit?: Function;
+    submitText?: string;
     ref?: RefObject<HTMLElement>;
-}
+} & ClassNameType;
 
-export default function FormFactory({ fields, ref, onSubmit = () => {} }: FormPropsType) {
+export default function FormFactory({ fields, ref, onSubmit = () => {}, submitText }: FormPropsType) {
     const [formData, onChange, handleSubmit, errors] = useFrom(fields, onSubmit);
 
     return (
@@ -36,7 +38,7 @@ export default function FormFactory({ fields, ref, onSubmit = () => {} }: FormPr
                     {...field}
                 />
             ))}
-            <Button className="c-form__submit">Submit</Button>
+            <Button className="c-form__submit">{translate(submitText || 'SUBMIT')}</Button>
         </Form>
     );
 }

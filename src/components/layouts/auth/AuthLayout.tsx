@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
 import { ClassNameType } from 'globals';
 import * as classNames from 'classnames';
 import AuthLayoutHeader from './AuthLayoutHeader';
@@ -13,14 +12,12 @@ export type DefaultLayoutPropsType = {
 
 export default function AuthLayout({ children, className }: DefaultLayoutPropsType) {
     return (
-        <Container className={classNames('l-auth d-flex flex-column flex-grow-1 justify-content-around', className)} fluid>
+        <div className={classNames('l-auth d-flex flex-column flex-grow-1 justify-content-around', className)}>
             <AuthLayoutHeader className="l-auth__header" />
-            <Row className="l-auth__content">
-                <Col className="l-auth__content-col">
-                    {children}
-                </Col>
-            </Row>
+            <div className="l-auth__content">
+                {children}
+            </div>
             <AuthLayoutFooter className="l-auth__footer" />
-        </Container>
+        </div>
     );
 }

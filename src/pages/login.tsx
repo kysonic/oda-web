@@ -1,15 +1,11 @@
 import React from 'react';
-import LoginPasswordForm from '@components/auth/LoginPasswordForm';
 import AuthLayout from '@components/layouts/auth/AuthLayout';
-import { translate } from '@i18n/index';
-
-import './login.scss';
+import AuthForm from '@components/auth/AuthForm';
 
 export default function LoginPage() {
     return (
-        <AuthLayout className="p-login">
-            <h1 className="p-login__title font-weight-bold text-center">{translate('AUTHORIZATION')}</h1>
-            <LoginPasswordForm className="p-login__form" />
+        <AuthLayout className="p-login d-flex flex-column align-items-center justify-content-center">
+            <AuthForm />
         </AuthLayout>
     );
 }
