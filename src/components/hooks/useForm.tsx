@@ -31,7 +31,10 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
 
     const isValid = async () => {
         try {
-            await validationSchema.validate(formData, { abortEarly: false });
+            const normalizedData = formData.values.reduce((acc, item) => {
+                return acc[item.name] = item.value;
+            }, {});
+            await validationSchema.validate(normalizedData, { abortEarly: false });
             setErrors({});
 
             return true;
@@ -39,7 +42,7 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
             const yupErrors = {};
 
             err.inner.forEach((error) => {
-                const name = error.path.replace('.value', '');
+                const name = error.path.replace(/.+\./, '');
                 yupErrors[name] = error.errors;
             });
 
@@ -56,7 +59,6 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         event.preventDefault();
 
         const isFormValid = await isValid();
-
         if (isFormValid) {
             submitCallback(formData, errors);
         }

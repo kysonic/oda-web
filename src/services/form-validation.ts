@@ -18,17 +18,28 @@ const requiredDecorator = (validator, field) => {
 const validators: ValidatorsType = {
     email: () => yup.string().email('Email is incorrect').max(100),
     password: () => yup.string().strongPassword('Password is weak'),
+    confirmPassword: () => yup.string()
+        .oneOf([yup.ref('password'), null], 'Passwords must match'),
 };
 
 function getValidatorByType(field: FieldType): ValidatorsType {
-    return validators[field.validation] && validators[field.validation]();
+    if (typeof field.validation === 'string') {
+        return validators[field.validation] && validators[field.validation]();
+    }
+    if (Array.isArray(field.validation)) {
+        return field.validation.reduce((acc, validation) => {
+            return validators[validation] && validators[validation]();
+        });
+    }
+    return {};
 }
 
 export function buildValidationSchema(fields: FieldsType, customRules?: ValidatorsType): yup {
     const rules = {
-        ...map(fields, (field) => yup.object().shape({ value: requiredDecorator(getValidatorByType(field), field) })),
+        // ...map(fields, (field, key) => yup.object().shape(({ ...requiredDecorator(getValidatorByType(field), field) }))),
+        ...map(fields, (field, key) => yup.object().shape({ [key]: requiredDecorator(getValidatorByType(field), field) })),
         ...customRules,
     };
-
+    console.log(rules);
     return yup.object().shape(rules);
 }

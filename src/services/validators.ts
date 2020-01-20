@@ -11,5 +11,6 @@ yup.addMethod(yup.string, 'phone', function (this: yup) {
 const STRONG_PASSWORD_REGEXP = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/;
 
 yup.addMethod(yup.string, 'strongPassword', function (this: yup) {
-    return this.test('strongPassword', 'Password is weak', (value) => (value ? STRONG_PASSWORD_REGEXP.test(value) : false));
+    // return this.test('strongPassword', 'Password is weak', (value) => (value ? STRONG_PASSWORD_REGEXP.test(value) : false));
+    return this.test('strongPassword', 'Password is weak', (value) => (value ? value.length > 5 : false));
 });
