@@ -23,21 +23,19 @@ const validators: ValidatorsType = {
 };
 
 function getValidatorByType(field: FieldType): ValidatorsType {
-    if (typeof field.validation === 'string') {
-        return validators[field.validation] && validators[field.validation]();
-    }
-    if (Array.isArray(field.validation)) {
-        return field.validation.reduce((acc, validation) => validators[validation] && validators[validation]());
-    }
-    return {};
+    return validators[field.validation] && validators[field.validation]();
 }
 
 export function buildValidationSchema(fields: FieldsType, customRules?: ValidatorsType): yup {
+    const validateRules = Object.entries(fields).reduce((acc, [fieldName, fieldObj]) => {
+        acc[fieldName] = requiredDecorator(getValidatorByType(fieldObj), fieldObj);
+        return acc;
+    }, {});
+
     const rules = {
-        // ...map(fields, (field, key) => yup.object().shape(({ ...requiredDecorator(getValidatorByType(field), field) }))),
-        ...map(fields, (field, key) => yup.object().shape({ [key]: requiredDecorator(getValidatorByType(field), field) })),
+        ...validateRules,
         ...customRules,
     };
-    console.log(rules);
+
     return yup.object().shape(rules);
 }

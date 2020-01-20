@@ -16,7 +16,7 @@ const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
         name: 'confirmPassword',
         fieldType: 'password',
         placeholder: 'Confirm your password',
-        validation: ['password', 'confirmPassword'],
+        validation: 'confirmPassword',
         required: true,
     },
 };

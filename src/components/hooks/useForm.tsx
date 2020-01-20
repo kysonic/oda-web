@@ -42,20 +42,23 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         setErrors({});
 
         try {
-            await validationSchema.validate(formData, { abortEarly: false });
+            const normalized = Object.entries(formData).reduce((acc, [key, value]) => {
+                acc[key] = value.value;
+                return acc;
+            }, {});
+
+            await validationSchema.validate(normalized, { abortEarly: false });
 
             return true;
         } catch (err) {
-            console.log(err);
             const yupErrors = {};
 
             err.inner.forEach((error) => {
-                const name = error.path.replace(/.+\./, '');
-                yupErrors[name] = error.errors;
+                const { path } = error;
+                yupErrors[path] = error.errors;
             });
 
             setErrors({
-                ...errors,
                 ...yupErrors,
             });
 
