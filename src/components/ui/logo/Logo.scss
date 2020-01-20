@@ -1,0 +1,14 @@
+$logo-width: 106px;
+$logo-height: 45px;
+$logo-width-xs: 62px;
+$logo-height-xs: 26px;
+
+.c-logo {
+  width: $logo-width;
+  height: $logo-height;
+
+  @include media-breakpoint-down(sm) {
+    width: $logo-width-xs;
+    height: $logo-height-xs;
+  }
+}

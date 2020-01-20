@@ -68,8 +68,8 @@ $colors: map-merge((
 ), $colors);
 
 $default:       #172b4d !default;
-$primary:       #5e72e4 !default;
-$secondary:     #f4f5f7 !default;
+$primary:       #ed1e79 !default;
+$secondary:     #fba763 !default;
 $success:       $green !default;
 $info:          $teal !default;
 $warning:       $orange !default;
@@ -292,6 +292,7 @@ $border-radius-sm:            .2rem !default;
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075);
 $box-shadow:                  0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
 $box-shadow-lg:               0 1rem 3rem rgba($black, .175);
+$box-shadow-popup:            0 10px 49px 0 rgba(0, 0, 0, 0.1);
 
 $component-active-color:        $white !default;
 $component-active-bg:           theme-color("primary") !default;
@@ -310,7 +311,7 @@ $transition-collapse:         height .35s ease !default;
 
 // Fonts
 
-$font-family-base: 'Open Sans', sans-serif !default;
+$font-family-base: 'Montserrat', sans-serif !default;
 $font-family-alt: 'Open Sans', sans-serif !default;
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`

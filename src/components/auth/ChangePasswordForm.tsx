@@ -22,8 +22,8 @@ const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
 };
 
 export default function ChangePasswordForm() {
-    const onSubmit = (values, errors) => {
-        console.log('Submit', values, errors);
+    const onSubmit = (values) => {
+        console.log('Submit', values);
     };
 
     return (

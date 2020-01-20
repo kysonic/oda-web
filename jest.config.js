@@ -19,6 +19,7 @@ module.exports = {
         '@styles/(.*)$': '<rootDir>/src/styles/$1',
         '@utils/(.*)$': '<rootDir>/src/utils/$1',
         '@types/(.*)$': '<rootDir>/src/types/$1',
+        '@img/(.*)$': '<rootDir>/public/img/$1',
     },
     moduleFileExtensions: [
         'ts',

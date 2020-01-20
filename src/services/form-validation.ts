@@ -9,15 +9,15 @@ type ValidatorsType = {
 
 const requiredDecorator = (validator, field) => {
     if (validator && field.required) {
-        return validator.required('Field must be not empty');
+        return validator.required('FIELD_MUST_NOT_BE_EMPTY');
     }
 
     return validator;
 };
 
 const validators: ValidatorsType = {
-    email: () => yup.string().email('Email is incorrect').max(100),
-    password: () => yup.string().strongPassword('Password is weak'),
+    email: () => yup.string().email('EMAIL_IS_NOT_CORRECT').max(100),
+    password: () => yup.string().strongPassword('PASSWORD_IS_WEAK'),
 };
 
 function getValidatorByType(field: FieldType): ValidatorsType {

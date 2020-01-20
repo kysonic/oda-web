@@ -1,8 +1,10 @@
 import React, { RefObject } from 'react';
 import { Form, Button } from 'reactstrap';
 import { capitalizeFirst } from '@utils/string';
-import { FieldType, FieldsType } from 'globals';
+import { FieldType, FieldsType, ClassNameType } from 'globals';
+import * as classNames from 'classnames';
 import useFrom from '@components/hooks/useForm';
+import { translate } from '@i18n/index';
 import Fields from './fields';
 
 type FieldPropsType = {} & FieldType;
@@ -18,14 +20,18 @@ export function Field(props: FieldPropsType) {
 export type FormPropsType = {
     fields: FieldsType;
     onSubmit?: Function;
+    submitProps?: {
+        caption?: string;
+        className?: string;
+    };
     ref?: RefObject<HTMLElement>;
-}
+} & ClassNameType;
 
-export default function FormFactory({ fields, ref, onSubmit = () => {} }: FormPropsType) {
+export default function FormFactory({ fields, ref, onSubmit = () => {}, submitProps = { caption: 'SUBMIT', className: '' }, className }: FormPropsType) {
     const [formData, onChange, handleSubmit, errors] = useFrom(fields, onSubmit);
 
     return (
-        <Form innerRef={ref} className="c-form" onSubmit={handleSubmit}>
+        <Form innerRef={ref} className={classNames('c-form', className)} onSubmit={handleSubmit}>
             {Object.entries(fields).map(([key, field]: [string, FieldType]) => (
                 <Field
                     className="c-form__field"
@@ -36,7 +42,7 @@ export default function FormFactory({ fields, ref, onSubmit = () => {} }: FormPr
                     {...field}
                 />
             ))}
-            <Button className="c-form__submit">Submit</Button>
+            <Button className={classNames('c-form__submit', submitProps.className)}>{translate(submitProps?.caption)}</Button>
         </Form>
     );
 }
