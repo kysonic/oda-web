@@ -1,4 +1,4 @@
-import '@styles/argon-design-system.global.scss';
+import '@styles/oda-design-system.global.scss';
 
 import React from 'react';
 import App from 'next/app';
@@ -6,7 +6,6 @@ import { NextComponentType, NextPageContext } from 'next/types';
 import nextCookie from 'next-cookies';
 import config from '@config/index';
 import { initStores, applyStoresInitialState } from '@services/next-mobx';
-import DefaultLayout from '@components/layouts/default/DefaultLayout';
 
 type OdaWebAppPropsType = NextComponentType & {initialState: any};
 
@@ -46,9 +45,7 @@ export default class OdaWebApp extends App<OdaWebAppPropsType> {
 
         return (
             <>
-                <DefaultLayout>
-                    <Component {...pageProps} />
-                </DefaultLayout>
+                <Component {...pageProps} />
             </>
         );
     }

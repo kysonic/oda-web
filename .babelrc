@@ -13,9 +13,11 @@
           "@stores": "./src/stores",
           "@styles": "./src/styles",
           "@utils": "./src/utils",
-          "@types": "./src/types"
+          "@types": "./src/types",
+          "@i18n": "./src/i18n",
+          "@svg": "./public/svg"
         },
-        "extensions": [".js", ".jsx", ".tsx"]
+        "extensions": [".js", ".jsx", ".tsx", ".svg"]
       }
     ],
     ["@babel/plugin-proposal-decorators", {

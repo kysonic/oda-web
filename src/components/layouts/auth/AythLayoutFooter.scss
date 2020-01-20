@@ -1,0 +1,46 @@
+$footer-item-padding: 32px;
+$footer-item-padding-xs: 4px;
+$footer-item-margin-left-xs: 11px;
+$footer-item-text-padding: 20px;
+$footer-item-icon-size: 30px;
+$footer-item-icon-size-xs: 24px;
+
+.c-footer {
+
+  &__item {
+    padding: $footer-item-padding;
+
+    @include media-breakpoint-down(sm) {
+      padding: $footer-item-padding-xs;
+    }
+  }
+
+  &__items {
+
+    @include media-breakpoint-down(sm) {
+      padding: 16px 0;
+    }
+  }
+}
+
+.c-footer-item {
+
+  &__icon {
+    width: $footer-item-icon-size;
+    height: $footer-item-icon-size;
+
+    @include media-breakpoint-down(sm) {
+      width: $footer-item-icon-size-xs;
+      height: $footer-item-icon-size-xs;
+    }
+  }
+
+  &__text {
+    padding-top: $footer-item-text-padding;
+
+    @include media-breakpoint-down(sm) {
+      padding-top: 0;
+      margin-left: $footer-item-margin-left-xs;
+    }
+  }
+}

@@ -10,6 +10,14 @@ export type errorsType = {
     [key: string]: Array<string>;
 }
 
+function getValueByType(type, { value, checked }) {
+    if (type === 'checkbox') {
+        return checked;
+    }
+
+    return value;
+}
+
 export type useFormReturnType = [FormConfigType, useCallbackType, useCallbackType, errorsType];
 
 export default function useForm(initialState: FormConfigType, submitCallback?: useCallbackType): useFormReturnType {
@@ -18,27 +26,27 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
     const [errors, setErrors] = useState({});
 
     const onChange = useCallback((event) => {
-        const { name, value } = event.target;
+        const { name, value, type, checked } = event.target;
+        const inputValue = getValueByType(type, { value, checked });
 
         setFormData({
             ...formData,
             [name]: {
                 ...formData[name],
-                value,
+                value: inputValue,
             },
         });
     }, [formData]);
 
     const isValid = async () => {
+        setErrors({});
+
         try {
-            const normalizedData = formData.values.reduce((acc, item) => {
-                return acc[item.name] = item.value;
-            }, {});
-            await validationSchema.validate(normalizedData, { abortEarly: false });
-            setErrors({});
+            await validationSchema.validate(formData, { abortEarly: false });
 
             return true;
         } catch (err) {
+            console.log(err);
             const yupErrors = {};
 
             err.inner.forEach((error) => {
@@ -59,8 +67,9 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         event.preventDefault();
 
         const isFormValid = await isValid();
+
         if (isFormValid) {
-            submitCallback(formData, errors);
+            submitCallback(formData);
         }
     }, [formData]);
 

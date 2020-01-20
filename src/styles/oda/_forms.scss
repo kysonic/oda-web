@@ -6,12 +6,42 @@ label {
 
 .form-control {
     font-size: $input-btn-font-size;
-    
+
     &:focus {
         &::placeholder {
             color: $input-focus-placeholder-color;
         }
     }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-group {
+
+    &--rounded {
+
+        .input-group-text {
+            border-top-left-radius: 22px;
+            border-bottom-left-radius: 22px;
+
+            & > i {
+                font-size: 20px;
+            }
+        }
+
+        .form-control {
+            border-radius: 22px;
+        }
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 
@@ -57,7 +87,7 @@ textarea[resize="horizontal"] {
     }
 }
 
-// Sizes 
+// Sizes
 
 .form-control-lg {
     font-size: $font-size-base;
@@ -69,7 +99,7 @@ textarea[resize="horizontal"] {
 .has-danger {
     position: relative;
 
-    &:after, {
+    &:after {
         width: 19px;
         height: 19px;
         line-height: 19px;
