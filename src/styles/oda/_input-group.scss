@@ -22,6 +22,10 @@
 
 .input-group-text {
     transition: $input-transition;
+
+	&.is-invalid {
+		border-color: $input-group-addon-invalid-border-color;
+	}
 }
 
 .input-group-alternative {
@@ -54,6 +58,10 @@
 	    color: $input-group-addon-focus-color;
 	    background-color: $input-group-addon-focus-bg;
 	    border-color: $input-group-addon-focus-border-color;
+
+		&.is-invalid {
+			border-color: $input-group-addon-invalid-border-color;
+		}
 	}
 
 	.form-control {

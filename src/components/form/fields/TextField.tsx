@@ -6,14 +6,14 @@ import * as classNames from 'classnames';
 
 type TextFieldPropsType = {} & FieldType;
 
-export default function TextField({ fieldType, name, label, placeholder, value, onChange, error, className, icon }: TextFieldPropsType) {
+export default function TextField({ fieldType, name, label, placeholder, value = '', onChange, error, className, icon, attrs = {} }: TextFieldPropsType) {
     return (
         <FormGroup className="c-text-field">
             {label && (<Label className="c-text-field__label" for={name}>{translate(label)}</Label>)}
             <InputGroup className={classNames('c-text-field__input-group', className)}>
                 {icon && (
-                    <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
+                    <InputGroupAddon className="c-text-field__addon" addonType="prepend">
+                        <InputGroupText className={classNames('c-text-field__group-text', { 'is-invalid': !!error })}>
                             <i className={`ni ni-${icon}`} />
                         </InputGroupText>
                     </InputGroupAddon>
@@ -26,7 +26,8 @@ export default function TextField({ fieldType, name, label, placeholder, value, 
                     placeholder={translate(placeholder)}
                     value={value}
                     onChange={onChange}
-                    invalid={error}
+                    invalid={!!error}
+                    {...attrs}
                 />
             </InputGroup>
             {error && (<FormText className="c-text-field__error" color="danger">{error.map((message) => translate(message)).join('')}</FormText>)}

@@ -46,7 +46,6 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
 
             return true;
         } catch (err) {
-            console.log(err);
             const yupErrors = {};
 
             err.inner.forEach((error) => {
@@ -55,7 +54,6 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
             });
 
             setErrors({
-                ...errors,
                 ...yupErrors,
             });
 

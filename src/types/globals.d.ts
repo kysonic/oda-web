@@ -46,6 +46,9 @@ export type FieldType = {
     placeholder?: string;
     validation?: string;
     required?: boolean;
+    attrs?: {
+        [key: string]: any;
+    };
 } & ClassNameType;
 
 export type FieldsType = {
