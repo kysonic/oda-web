@@ -14,6 +14,8 @@ const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
         placeholder: 'EMAIL',
         validation: 'email',
         required: true,
+        className: 'input-group--rounded',
+        icon: 'ui-outline-1_email-83',
     },
     password: {
         type: 'text',
@@ -22,6 +24,8 @@ const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
         placeholder: 'PASSWORD',
         validation: 'password',
         required: true,
+        className: 'input-group--rounded',
+        icon: 'ui-outline-1_lock-circle',
     },
     rememberMe: {
         type: 'checkbox',
@@ -34,12 +38,14 @@ const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
 export type LoginPasswordFormPropsType = {} & ClassNameType;
 
 export default function LoginPasswordForm({ className }: LoginPasswordFormPropsType) {
+    const submitProps = { caption: translate('SIGN_IN'), className: 'btn-gradient' };
+
     return (
         <div className={classNames('c-login-password-form', className)}>
             <FormFactory
                 className="c-login-password-form__form"
                 fields={LOGIN_PASSWORD_FORM_FIELDS}
-                submitText={translate('SIGN_IN')}
+                submitProps={submitProps}
                 onSubmit={(values) => console.log('SBMT', values)}
             />
         </div>

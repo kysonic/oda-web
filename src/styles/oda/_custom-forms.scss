@@ -2,16 +2,21 @@
     // Background-color and (when enabled) gradient
     &::before {
         border: $custom-control-indicator-border-width solid $custom-control-indicator-border-color;
+        top: (($font-size-base * $line-height-base - $custom-control-indicator-size) / 2) - 0.15;
         @if $enable-transitions {
             transition: $input-transition;
-        } 
+        }
     }
 
     span {
         position: relative;
         top: 2px;
     }
-} 
+
+    &::after {
+        top: (($font-size-base * $line-height-base - $custom-control-indicator-size) / 2) - 0.15;
+    }
+}
 
 .custom-control-label {
     margin-bottom: 0;
@@ -23,7 +28,7 @@
     }
 }
 
-// Alternative custom control 
+// Alternative custom control
 .custom-control-alternative {
     .custom-control-label {
         // Background-color and (when enabled) gradient
@@ -31,7 +36,7 @@
             border: 0;
             box-shadow: $input-alternative-box-shadow;
         }
-    } 
+    }
 
     .custom-control-input {
         &:checked {
@@ -138,10 +143,10 @@
                 &:before {
                     background: $custom-toggle-checked-bg;
                     transform: translateX(1.625rem);
-                }  
+                }
             }
         }
-        
+
         &:disabled {
             + .custom-toggle-slider {
                 border: $custom-control-indicator-border-width solid $custom-control-indicator-disabled-bg;
@@ -170,7 +175,7 @@
     border: $custom-control-indicator-border-width solid $input-border-color;
     border-radius: 34px !important;
     background-color: transparent;
-    
+
 
     &:before {
         position: absolute;

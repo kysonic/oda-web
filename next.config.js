@@ -16,6 +16,6 @@ module.exports = withSass({
     },
     sassLoaderOptions: {
         includePaths: ["src/styles"],
-        data: "@import 'src/styles/argon-design-system-core';"
+        data: "@import 'src/styles/oda-design-system-core';"
     }
 });
