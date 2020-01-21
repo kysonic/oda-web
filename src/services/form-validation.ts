@@ -19,7 +19,7 @@ const validators: ValidatorsType = {
     email: () => yup.string().email('EMAIL_IS_NOT_CORRECT').max(100),
     password: () => yup.string().strongPassword('PASSWORD_IS_WEAK'),
     confirmPassword: () => yup.string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match'),
+        .oneOf([yup.ref('password'), null], 'PASSWORDS_MUST_MATCH'),
 };
 
 function getValidatorByType(field: FieldType): ValidatorsType {
