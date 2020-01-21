@@ -54,3 +54,7 @@ export type FieldType = {
 export type FieldsType = {
     [key: string]: FieldType;
 };
+
+// APOLLO
+
+export type ApolloClientType = ApolloClient<NormalizedCacheObject> | null;

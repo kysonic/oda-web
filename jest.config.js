@@ -15,11 +15,10 @@ module.exports = {
         '@config/(.*)$': '<rootDir>/src/config/$1',
         '@pages/(.*)$': '<rootDir>/src/pages/$1',
         '@services/(.*)$': '<rootDir>/src/services/$1',
-        '@stores/(.*)$': '<rootDir>/src/stores/$1',
         '@styles/(.*)$': '<rootDir>/src/styles/$1',
         '@utils/(.*)$': '<rootDir>/src/utils/$1',
         '@types/(.*)$': '<rootDir>/src/types/$1',
-        '@img/(.*)$': '<rootDir>/public/img/$1',
+        '@svg/(.*)$': '<rootDir>/public/svg/$1',
     },
     moduleFileExtensions: [
         'ts',

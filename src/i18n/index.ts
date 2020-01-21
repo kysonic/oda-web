@@ -1,5 +1,3 @@
-import globalStore from '@stores/global';
-
 import enUS from './en-US';
 import ruRU from './ru-RU';
 
@@ -11,5 +9,5 @@ const languages = {
 export default languages;
 
 export function translate(code) {
-    return languages[globalStore.appStore.strippedLanguage]?.[code] || code;
+    return languages.ruRU?.[code] || code;
 }

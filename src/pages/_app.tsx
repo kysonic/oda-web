@@ -5,7 +5,6 @@ import App from 'next/app';
 import { NextComponentType, NextPageContext } from 'next/types';
 import nextCookie from 'next-cookies';
 import config from '@config/index';
-import { initStores, applyStoresInitialState } from '@services/next-mobx';
 
 type OdaWebAppPropsType = NextComponentType & {initialState: any};
 
@@ -20,8 +19,6 @@ export default class OdaWebApp extends App<OdaWebAppPropsType> {
 
         const token = nextCookie(ctx)[config.app?.tokenName];
 
-        const initialState = await initStores({ token });
-
         if (Component.getInitialProps) {
             pageProps = await Component.getInitialProps(ctx);
         }
@@ -32,12 +29,11 @@ export default class OdaWebApp extends App<OdaWebAppPropsType> {
             baseUrl = `http://${ctx.req.headers.host}`;
         }
 
-        return { pageProps, baseUrl, initialState };
+        return { pageProps, baseUrl };
     }
 
     componentDidMount(): void {
         // Setup client initial state
-        applyStoresInitialState(this.props.initialState);
     }
 
     render() {
