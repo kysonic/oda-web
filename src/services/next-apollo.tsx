@@ -20,47 +20,47 @@ export function withApollo(PageComponent) {
         </ApolloProvider>
     );
 
-    if (PageComponent.getInitialProps && !isBrowser) {
-        WithApollo.getInitialProps = async (ctx) => {
-            const { AppTree } = ctx;
-            ctx.apolloClient = init();
-            let pageProps = {};
+    WithApollo.getInitialProps = async (ctx) => {
+        const { AppTree } = ctx;
+        ctx.apolloClient = init();
+        let pageProps = {};
 
-            if (PageComponent.getInitialProps) {
-                pageProps = await PageComponent.getInitialProps(ctx);
+        if (PageComponent.getInitialProps) {
+            pageProps = await PageComponent.getInitialProps(ctx);
+        }
+
+        if (!isBrowser) {
+            if (ctx.res && ctx.res.finished) {
+                return pageProps;
             }
 
-            if (!isBrowser) {
-                if (ctx.res && ctx.res.finished) {
-                    return pageProps;
-                }
+            try {
+                const { getDataFromTree } = await import('@apollo/react-ssr');
 
-                try {
-                    const { getDataFromTree } = await import('@apollo/react-ssr');
-
-                    await getDataFromTree(
-                        <AppTree
-                            pageProps={{
-                                ...pageProps,
-                                apolloClient: ctx.apolloClient,
-                            }}
-                        />
-                    );
-                } catch (error) {
-                    console.error('Error while running `getDataFromTree`', error);
-                }
-
-                Head.rewind();
+                await getDataFromTree(
+                    <AppTree
+                        pageProps={{
+                            ...pageProps,
+                            apolloClient: ctx.apolloClient,
+                        }}
+                    />
+                );
+            } catch (error) {
+                console.error('Error while running `getDataFromTree`', error);
             }
 
-            const apolloState = ctx.apolloClient.cache.extract();
+            Head.rewind();
+        }
 
-            return {
-                ...pageProps,
-                apolloState,
-            };
+        const apolloState = ctx.apolloClient.cache.extract();
+
+        console.log(apolloState);
+
+        return {
+            ...pageProps,
+            apolloState,
         };
-    }
+    };
 
     return WithApollo;
 }
