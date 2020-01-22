@@ -55,14 +55,6 @@ export function pick(target: Record<string, any>, props: Array<string>): Record<
     }, {});
 }
 
-
-Object.fromEntries = function fromEntries(iterable) {
-    return [...iterable].reduce((obj, [key, val]) => {
-        obj[key] = val;
-        return obj;
-    }, {});
-};
-
 /**
  * Map object
  * @param obj - entry object
