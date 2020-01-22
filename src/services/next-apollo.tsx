@@ -2,9 +2,12 @@ import React from 'react';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { init } from '@services/apollo';
-import { ApolloClientType } from 'globals';
+import { ApolloClientType, User } from 'globals';
 import { isBrowser } from '@utils/device';
-
+import nextCookies from 'next-cookies';
+import { gql } from 'apollo-boost';
+import { redirect } from '@services/next';
+import config from '@config/index';
 
 export type WithApolloPropsType = {
     apolloClient: ApolloClientType;
@@ -22,11 +25,12 @@ export function withApollo(PageComponent) {
 
     WithApollo.getInitialProps = async (ctx) => {
         const { AppTree } = ctx;
-        ctx.apolloClient = init();
+        const { token } = nextCookies(ctx);
+        ctx.apolloClient = init({}, { token });
         let pageProps = {};
 
         if (PageComponent.getInitialProps) {
-            pageProps = await PageComponent.getInitialProps(ctx);
+            pageProps = await PageComponent.getInitialProps(ctx, ctx.apolloClient);
         }
 
         if (!isBrowser) {
@@ -54,8 +58,6 @@ export function withApollo(PageComponent) {
 
         const apolloState = ctx.apolloClient.cache.extract();
 
-        console.log(apolloState);
-
         return {
             ...pageProps,
             apolloState,
@@ -63,4 +65,59 @@ export function withApollo(PageComponent) {
     };
 
     return WithApollo;
+}
+
+type WithAuthPropsType = {
+    [key: string]: any;
+}
+
+type WithAutPagePropsType = {
+    myUser?: User;
+}
+
+export const CARDS_QUERY = gql`
+    query {
+        myUser {
+            id
+            name
+            email
+            emailApproved
+            role {
+                id
+                name
+            }
+        }
+    }
+`;
+
+// User together with withApollo decorator to achieve apolloClient in getInitialProps callback
+export function withAuth(PageComponent) {
+    const WithAuth = ({ ...pageProps }: WithAuthPropsType) => (
+        <PageComponent {...pageProps} />
+    );
+
+    WithAuth.getInitialProps = async (ctx, apolloClient) => {
+        let pageProps: WithAutPagePropsType = {};
+
+        if (PageComponent.getInitialProps) {
+            pageProps = await PageComponent.getInitialProps(ctx, ctx.apolloClient);
+        }
+
+
+        if (apolloClient) {
+            const { data: { myUser } } = await apolloClient.query({ query: CARDS_QUERY });
+
+            if (!myUser) {
+                redirect({ ctx, where: config.app.redirectUrl });
+            }
+
+            // Here could a role specified logic.
+
+            pageProps.myUser = myUser;
+        }
+
+        return { pageProps };
+    };
+
+    return WithAuth;
 }

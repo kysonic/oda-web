@@ -5,8 +5,12 @@ import { isBrowser } from '@utils/device';
 import fetch from 'isomorphic-unfetch';
 import { ApolloClientType } from 'globals';
 
-interface Options {
-    getToken: () => string;
+type Options = {
+    token?: string;
+}
+
+type AuthHeadersType = {
+    Authorization?: string;
 }
 
 export function create(initialState: any = {}, options?: Options) {
@@ -17,12 +21,17 @@ export function create(initialState: any = {}, options?: Options) {
     });
 
     const authLink = setContext((_, { headers }) => {
-        const token = options?.getToken();
+        const token = options?.token;
+        const authHeaders: AuthHeadersType = {};
+
+        if (token) {
+            authHeaders.Authorization = `Bearer ${token}`;
+        }
 
         return {
             headers: {
                 ...headers,
-                cookie: token ? `qid=${token}` : '',
+                ...authHeaders,
             },
         };
     });
