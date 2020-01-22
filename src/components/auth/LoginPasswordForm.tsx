@@ -1,8 +1,10 @@
-import React from 'react';
-import { ClassNameType, FieldsType } from 'globals';
+import React, { useEffect } from 'react';
+import { ClassNameType, FieldsType, FieldType } from 'globals';
 import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
 import { translate } from '@i18n/index';
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN_MUTATION } from '@graphql/user';
 
 import './LoginPasswordForm.scss';
 
@@ -43,8 +45,35 @@ const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
 
 export type LoginPasswordFormPropsType = {} & ClassNameType;
 
+export type onSubmitArgsType = {
+    email: FieldType;
+    password: FieldType;
+}
+
 export default function LoginPasswordForm({ className }: LoginPasswordFormPropsType) {
-    const submitProps = { caption: translate('SIGN_IN'), className: 'btn-gradient' };
+    const [login, { loading, error, data }] = useMutation(LOGIN_MUTATION);
+
+    const submitProps = {
+        caption: translate(!loading ? 'SIGN_IN' : 'LOADING...'),
+        className: 'btn-gradient',
+    };
+
+    const onSubmit = ({ email, password }: onSubmitArgsType) => {
+        login({
+            variables: {
+                email: email.value,
+                password: password.value,
+            },
+        });
+    };
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+
+    useEffect(() => {
+        console.log(error?.message);
+    }, [error]);
 
     return (
         <div className={classNames('c-login-password-form', className)}>
@@ -52,7 +81,7 @@ export default function LoginPasswordForm({ className }: LoginPasswordFormPropsT
                 className="c-login-password-form__form"
                 fields={LOGIN_PASSWORD_FORM_FIELDS}
                 submitProps={submitProps}
-                onSubmit={(values) => console.log('SBMT', values)}
+                onSubmit={onSubmit}
             />
         </div>
     );

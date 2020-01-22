@@ -8,6 +8,7 @@ import nextCookies from 'next-cookies';
 import { gql } from 'apollo-boost';
 import { redirect } from '@services/next';
 import config from '@config/index';
+import { MY_USER_QUERY } from '@graphql/user';
 
 export type WithApolloPropsType = {
     apolloClient: ApolloClientType;
@@ -75,21 +76,6 @@ type WithAutPagePropsType = {
     myUser?: User;
 }
 
-export const CARDS_QUERY = gql`
-    query {
-        myUser {
-            id
-            name
-            email
-            emailApproved
-            role {
-                id
-                name
-            }
-        }
-    }
-`;
-
 // User together with withApollo decorator to achieve apolloClient in getInitialProps callback
 export function withAuth(PageComponent) {
     const WithAuth = ({ ...pageProps }: WithAuthPropsType) => (
@@ -105,7 +91,7 @@ export function withAuth(PageComponent) {
 
 
         if (apolloClient) {
-            const { data: { myUser } } = await apolloClient.query({ query: CARDS_QUERY });
+            const { data: { myUser } } = await apolloClient.query({ query: MY_USER_QUERY });
 
             if (!myUser) {
                 redirect({ ctx, where: config.app.redirectUrl });

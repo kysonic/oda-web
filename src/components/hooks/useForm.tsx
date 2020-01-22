@@ -18,7 +18,7 @@ function getValueByType(type, { value, checked }) {
     return value;
 }
 
-export type useFormReturnType = [FormConfigType, useCallbackType, useCallbackType, errorsType];
+export type useFormReturnType = [FormConfigType, useCallbackType, useCallbackType, errorsType, Function];
 
 export default function useForm(initialState: FormConfigType, submitCallback?: useCallbackType): useFormReturnType {
     const [formData, setFormData] = useState(initialState);
@@ -71,5 +71,5 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         }
     }, [formData]);
 
-    return [formData, onChange, onSubmit, errors];
+    return [formData, onChange, onSubmit, errors, setErrors];
 }
