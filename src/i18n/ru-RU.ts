@@ -12,4 +12,6 @@ export default {
     PASSWORD_IS_WEAK: 'Пароль должен содержать хотя бы один символ и буквы в верхнем и нижнем регистре',
     FIELD_MUST_NOT_BE_EMPTY: 'Поле не должно быть пустым',
     'LOADING...': 'Загрузка...',
+    INVALID_PASSWORD: 'Пароль не верный',
+    NO_SUCH_USER_FOUND: 'Пользователь не найден',
 };

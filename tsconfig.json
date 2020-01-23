@@ -32,6 +32,7 @@
       "@types/*": ["./src/types/*"],
       "@i18n/*": ["./src/i18n/*"],
       "@graphql/*": ["./src/graphql/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@svg/*": ["./public/svg/*"]
     }
   },

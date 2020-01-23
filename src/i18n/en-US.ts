@@ -12,4 +12,6 @@ export default {
     PASSWORD_IS_WEAK: 'Password should contain at least 4 mix of upper and lower case characters, one numeric and one special character',
     FIELD_MUST_NOT_BE_EMPTY: 'Filed must be not empty',
     'LOADING...': 'Loading...',
+    INVALID_PASSWORD: 'Invalid password',
+    NO_SUCH_USER_FOUND: 'No such user found',
 };

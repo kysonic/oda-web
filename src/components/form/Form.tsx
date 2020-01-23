@@ -3,7 +3,7 @@ import { Form, Button } from 'reactstrap';
 import { capitalizeFirst } from '@utils/string';
 import { FieldType, FieldsType, ClassNameType } from 'globals';
 import * as classNames from 'classnames';
-import useFrom from '@components/hooks/useForm';
+import useFrom from '@hooks/useForm';
 import { translate } from '@i18n/index';
 import Fields from './fields';
 
@@ -25,9 +25,12 @@ export type FormPropsType = {
         className?: string;
     };
     ref?: RefObject<HTMLElement>;
+    externalErrors: {
+        [key: string]: string;
+    };
 } & ClassNameType;
 
-export default function FormFactory({ fields, ref, onSubmit = () => {}, submitProps = { caption: 'SUBMIT', className: '' }, className }: FormPropsType) {
+export default function FormFactory({ fields, ref, onSubmit = () => {}, submitProps = { caption: 'SUBMIT', className: '' }, className, externalErrors }: FormPropsType) {
     const [formData, onChange, handleSubmit, errors] = useFrom(fields, onSubmit);
 
     return (
@@ -37,7 +40,7 @@ export default function FormFactory({ fields, ref, onSubmit = () => {}, submitPr
                     className="c-form__field"
                     key={`${field.type}-${field.name}`}
                     value={formData[field.name].value}
-                    error={errors[field.name]}
+                    error={errors[field.name] || externalErrors[field.name]}
                     onChange={onChange}
                     {...field}
                 />

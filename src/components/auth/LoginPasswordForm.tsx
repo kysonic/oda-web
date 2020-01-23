@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
-import { ClassNameType, FieldsType, FieldType } from 'globals';
+import React from 'react';
+import { ClassNameType, FieldsType, FieldType, ApolloClientType } from 'globals';
 import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
 import { translate } from '@i18n/index';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { LOGIN_MUTATION } from '@graphql/user';
+import useApolloErrors from '@hooks/useApolloErrors';
+import { redirect } from '@services/next';
 
 import './LoginPasswordForm.scss';
 
@@ -51,7 +53,18 @@ export type onSubmitArgsType = {
 }
 
 export default function LoginPasswordForm({ className }: LoginPasswordFormPropsType) {
-    const [login, { loading, error, data }] = useMutation(LOGIN_MUTATION);
+    const client: ApolloClientType<any> = useApolloClient();
+
+    const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
+        onCompleted({ login: { token } }) {
+            document.cookie = `token=${token}; path=/`;
+            client.writeData({ data: { isLoggedIn: true } });
+            redirect({ where: '/cards' });
+            // TODO: Cache user query
+        },
+    });
+
+    const [errors] = useApolloErrors(error);
 
     const submitProps = {
         caption: translate(!loading ? 'SIGN_IN' : 'LOADING...'),
@@ -67,14 +80,6 @@ export default function LoginPasswordForm({ className }: LoginPasswordFormPropsT
         });
     };
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
-
-    useEffect(() => {
-        console.log(error?.message);
-    }, [error]);
-
     return (
         <div className={classNames('c-login-password-form', className)}>
             <FormFactory
@@ -82,6 +87,7 @@ export default function LoginPasswordForm({ className }: LoginPasswordFormPropsT
                 fields={LOGIN_PASSWORD_FORM_FIELDS}
                 submitProps={submitProps}
                 onSubmit={onSubmit}
+                externalErrors={errors}
             />
         </div>
     );
