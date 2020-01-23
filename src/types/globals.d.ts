@@ -46,8 +46,15 @@ export type FieldType = {
     placeholder?: string;
     validation?: string;
     required?: boolean;
+    attrs?: {
+        [key: string]: any;
+    };
 } & ClassNameType;
 
 export type FieldsType = {
     [key: string]: FieldType;
 };
+
+// APOLLO
+
+export type ApolloClientType = ApolloClient<NormalizedCacheObject> | null;

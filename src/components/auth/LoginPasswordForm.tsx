@@ -16,6 +16,9 @@ const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
         required: true,
         className: 'input-group--rounded',
         icon: 'ui-outline-1_email-83',
+        attrs: {
+            autoComplete: 'username',
+        },
     },
     password: {
         type: 'text',
@@ -26,6 +29,9 @@ const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
         required: true,
         className: 'input-group--rounded',
         icon: 'ui-outline-1_lock-circle',
+        attrs: {
+            autoComplete: 'current-password',
+        },
     },
     rememberMe: {
         type: 'checkbox',
