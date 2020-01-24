@@ -14,4 +14,5 @@ export default {
     'LOADING...': 'Loading...',
     INVALID_PASSWORD: 'Invalid password',
     NO_SUCH_USER_FOUND: 'No such user found',
+    PASSWORDS_MUST_MATCH: 'Passwords must match',
 };
