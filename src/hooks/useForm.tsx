@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { FieldType, useCallbackType } from 'globals';
-import { buildValidationSchema } from '@services/form-validation';
+import { buildValidationSchema } from '@services/form';
 
 export type FormConfigType = {
     [key: string]: FieldType;

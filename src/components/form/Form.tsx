@@ -30,7 +30,7 @@ export type FormPropsType = {
     };
 } & ClassNameType;
 
-export default function FormFactory({ fields, ref, onSubmit = () => {}, submitProps = { caption: 'SUBMIT', className: '' }, className, externalErrors }: FormPropsType) {
+export default function FormFactory({ fields, ref, onSubmit = () => {}, submitProps = { caption: 'SUBMIT', className: '' }, className, externalErrors = [] }: FormPropsType) {
     const [formData, onChange, handleSubmit, errors] = useFrom(fields, onSubmit);
 
     return (

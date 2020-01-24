@@ -1,5 +1,6 @@
 export default {
     AUTHORIZATION: 'Авторизация',
+    REGISTRATION: 'Регистрация',
     COPYRIGHT: 'Copyright ©',
     ALL_RIGHTS_RESERVED: 'Все права защищены.',
     FORGOT_PASSWORD: 'Забыли пароль?',
@@ -14,4 +15,6 @@ export default {
     'LOADING...': 'Загрузка...',
     INVALID_PASSWORD: 'Пароль не верный',
     NO_SUCH_USER_FOUND: 'Пользователь не найден',
+    DO_NOT_HAVE_ACCOUNT_YET: 'Регистрация',
+    RETURN_TO_SING_IN: 'Назад',
 };

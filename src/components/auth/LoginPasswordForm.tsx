@@ -4,58 +4,56 @@ import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
 import { translate } from '@i18n/index';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
-import { LOGIN_MUTATION } from '@graphql/user';
+import { LOGIN_MUTATION, SIGNUP_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
 import { redirect } from '@services/next';
+import { emailFieldFactory, passwordFieldFactory, rememberMeFieldFactory } from '@services/form';
 
 import './LoginPasswordForm.scss';
 
-const LOGIN_PASSWORD_FORM_FIELDS: FieldsType = {
-    email: {
-        type: 'text',
-        name: 'email',
-        fieldType: 'email',
-        placeholder: 'EMAIL',
-        validation: 'email',
-        required: true,
-        className: 'input-group--rounded',
-        icon: 'ui-outline-1_email-83',
+const LOGIN_FORM_FIELDS: FieldsType = {
+    email: emailFieldFactory({
         attrs: {
             autoComplete: 'username',
         },
-    },
-    password: {
-        type: 'text',
-        name: 'password',
-        fieldType: 'password',
-        placeholder: 'PASSWORD',
-        validation: 'password',
-        required: true,
-        className: 'input-group--rounded',
-        icon: 'ui-outline-1_lock-circle',
+    }),
+    password: passwordFieldFactory({
         attrs: {
             autoComplete: 'current-password',
         },
-    },
-    rememberMe: {
-        type: 'checkbox',
-        name: 'rememberMe',
-        label: 'REMEMBER_ME',
-        required: false,
-    },
+    }),
+    rememberMe: rememberMeFieldFactory(),
 };
 
-export type LoginPasswordFormPropsType = {} & ClassNameType;
+const SIGNUP_FORM_FIELDS: FieldsType = {
+    email: emailFieldFactory({
+        value: '',
+        attrs: {
+            autoComplete: 'off',
+        },
+    }),
+    password: passwordFieldFactory({
+        value: '',
+        attrs: {
+            autoComplete: 'off',
+        },
+    }),
+};
+
+export type LoginPasswordFormPropsType = {
+    mode?: 'signIn' | 'signUp';
+} & ClassNameType;
 
 export type onSubmitArgsType = {
     email: FieldType;
     password: FieldType;
 }
 
-export default function LoginPasswordForm({ className }: LoginPasswordFormPropsType) {
+export default function LoginPasswordForm({ className, mode = 'signIn' }: LoginPasswordFormPropsType) {
     const client: ApolloClientType<any> = useApolloClient();
+    const isSingIn = () => mode === 'signIn';
 
-    const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
+    const [login, { loading, error }] = useMutation(isSingIn() ? LOGIN_MUTATION : SIGNUP_MUTATION, {
         onCompleted({ login: { token } }) {
             document.cookie = `token=${token}; path=/`;
             client.writeData({ data: { isLoggedIn: true } });
@@ -66,9 +64,17 @@ export default function LoginPasswordForm({ className }: LoginPasswordFormPropsT
 
     const [errors] = useApolloErrors(error);
 
+    const getSubmitCaption = () => {
+        if (loading) {
+            return 'LOADING...';
+        }
+
+        return isSingIn() ? 'SIGN_IN' : 'SIGN_UP';
+    };
+
     const submitProps = {
-        caption: translate(!loading ? 'SIGN_IN' : 'LOADING...'),
-        className: 'btn-gradient',
+        caption: translate(getSubmitCaption()),
+        className: classNames('btn-gradient', { 'mt-4': !isSingIn() }),
     };
 
     const onSubmit = ({ email, password }: onSubmitArgsType) => {
@@ -84,7 +90,7 @@ export default function LoginPasswordForm({ className }: LoginPasswordFormPropsT
         <div className={classNames('c-login-password-form', className)}>
             <FormFactory
                 className="c-login-password-form__form"
-                fields={LOGIN_PASSWORD_FORM_FIELDS}
+                fields={isSingIn() ? LOGIN_FORM_FIELDS : SIGNUP_FORM_FIELDS}
                 submitProps={submitProps}
                 onSubmit={onSubmit}
                 externalErrors={errors}

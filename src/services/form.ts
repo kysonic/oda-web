@@ -32,3 +32,41 @@ export function buildValidationSchema(fields: FieldsType, customRules?: Validato
 
     return yup.object().shape(rules);
 }
+
+export const emailFieldFactory = (extra = {}) => (
+    {
+        type: 'text',
+        name: 'email',
+        fieldType: 'email',
+        placeholder: 'EMAIL',
+        validation: 'email',
+        required: true,
+        className: 'input-group--rounded',
+        icon: 'ui-outline-1_email-83',
+        ...extra,
+    }
+);
+
+export const passwordFieldFactory = (extra = {}) => (
+    {
+        type: 'text',
+        name: 'password',
+        fieldType: 'password',
+        placeholder: 'PASSWORD',
+        validation: 'password',
+        required: true,
+        className: 'input-group--rounded',
+        icon: 'ui-outline-1_lock-circle',
+        ...extra,
+    }
+);
+
+export const rememberMeFieldFactory = (extra = {}) => (
+    {
+        type: 'checkbox',
+        name: 'rememberMe',
+        label: 'REMEMBER_ME',
+        required: false,
+        ...extra,
+    }
+);
