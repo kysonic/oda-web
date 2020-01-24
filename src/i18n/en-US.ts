@@ -15,4 +15,5 @@ export default {
     INVALID_PASSWORD: 'Invalid password',
     NO_SUCH_USER_FOUND: 'No such user found',
     PASSWORDS_MUST_MATCH: 'Passwords must match',
+    RESTORE_PASSWORD: 'Restore password',
 };

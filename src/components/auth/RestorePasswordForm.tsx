@@ -7,7 +7,6 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { LOGIN_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
 import { redirect } from '@services/next';
-import { onSubmitArgsType } from '@components/auth/LoginPasswordForm';
 
 export type onSubmitArgsType = {
     email: FieldType;
@@ -29,17 +28,18 @@ const RESTORE_PASSWORD_FORM_FIELDS: FieldsType = {
     },
 };
 
-export default function RestorePasswordEmailForm() {
+export default function RestorePasswordForm({ className }) {
     const client: ApolloClientType<any> = useApolloClient();
 
-    const [restorePassword, { loading, error }] = useMutation(LOGIN_MUTATION, {
-        onCompleted({ login: { token } }) {
-            document.cookie = `token=${token}; path=/`;
-            client.writeData({ data: { isLoggedIn: true } });
-            redirect({ where: '/cards' });
-            // TODO: Cache user query
-        },
-    });
+    // const [restorePassword, { loading, error }] = useMutation(LOGIN_MUTATION, {
+    //     onCompleted({ login: { token } }) {
+    //         document.cookie = `token=${token}; path=/`;
+    //         client.writeData({ data: { isLoggedIn: true } });
+    //         redirect({ where: '/cards' });
+    //         // TODO: Cache user query
+    //     },
+    // });
+    const loading = false;
 
     const submitProps = {
         caption: translate(!loading ? 'SIGN_IN' : 'LOADING...'),
@@ -47,13 +47,14 @@ export default function RestorePasswordEmailForm() {
     };
 
     const onSubmit = ({ email }: onSubmitArgsType) => {
-        restorePassword(email);
+        // restorePassword(email);
     };
 
-    const [errors] = useApolloErrors(error);
+    const errors = {};
+    // const [errors] = useApolloErrors(error);
 
     return (
-        <div className={classNames('c-login-password-form')}>
+        <div className={classNames('c-login-password-form', className)}>
             <FormFactory
                 className="c-login-password-form__form"
                 fields={RESTORE_PASSWORD_FORM_FIELDS}
