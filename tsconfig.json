@@ -23,6 +23,7 @@
     "experimentalDecorators": true,
     "paths": {
       "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/components/layouts/*"],
       "@config/*": ["./src/config/*"],
       "@pages/*": ["./src/pages/*"],
       "@services/*": ["./src/services/*"],
@@ -30,6 +31,8 @@
       "@utils/*": ["./src/utils/*"],
       "@types/*": ["./src/types/*"],
       "@i18n/*": ["./src/i18n/*"],
+      "@graphql/*": ["./src/graphql/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@svg/*": ["./public/svg/*"]
     }
   },

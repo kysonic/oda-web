@@ -6,7 +6,7 @@ import fetch from 'isomorphic-unfetch';
 import { ApolloClientType } from 'globals';
 
 type Options = {
-    token?: string;
+    getToken?: () => string | undefined;
 }
 
 type AuthHeadersType = {
@@ -21,11 +21,14 @@ export function create(initialState: any = {}, options?: Options) {
     });
 
     const authLink = setContext((_, { headers }) => {
-        const token = options?.token;
         const authHeaders: AuthHeadersType = {};
 
-        if (token) {
-            authHeaders.Authorization = `Bearer ${token}`;
+        if (options?.getToken) {
+            const token = options?.getToken();
+
+            if (token) {
+                authHeaders.Authorization = `Bearer ${token}`;
+            }
         }
 
         return {

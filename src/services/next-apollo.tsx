@@ -5,9 +5,9 @@ import { init } from '@services/apollo';
 import { ApolloClientType, User } from 'globals';
 import { isBrowser } from '@utils/device';
 import nextCookies from 'next-cookies';
-import { gql } from 'apollo-boost';
 import { redirect } from '@services/next';
 import config from '@config/index';
+import { MY_USER_QUERY } from '@graphql/user';
 
 export type WithApolloPropsType = {
     apolloClient: ApolloClientType;
@@ -17,7 +17,7 @@ export type WithApolloPropsType = {
 }
 
 export function withApollo(PageComponent) {
-    const WithApollo = ({ apolloState, apolloClient = init(apolloState), ...pageProps }: WithApolloPropsType) => (
+    const WithApollo = ({ apolloState, apolloClient = init(apolloState, { getToken: () => nextCookies({}).token }), ...pageProps }: WithApolloPropsType) => (
         <ApolloProvider client={apolloClient}>
             <PageComponent {...pageProps} />
         </ApolloProvider>
@@ -25,8 +25,7 @@ export function withApollo(PageComponent) {
 
     WithApollo.getInitialProps = async (ctx) => {
         const { AppTree } = ctx;
-        const { token } = nextCookies(ctx);
-        ctx.apolloClient = init({}, { token });
+        ctx.apolloClient = init({}, { getToken: () => nextCookies(ctx).token });
         let pageProps = {};
 
         if (PageComponent.getInitialProps) {
@@ -75,21 +74,6 @@ type WithAutPagePropsType = {
     myUser?: User;
 }
 
-export const CARDS_QUERY = gql`
-    query {
-        myUser {
-            id
-            name
-            email
-            emailApproved
-            role {
-                id
-                name
-            }
-        }
-    }
-`;
-
 // User together with withApollo decorator to achieve apolloClient in getInitialProps callback
 export function withAuth(PageComponent) {
     const WithAuth = ({ ...pageProps }: WithAuthPropsType) => (
@@ -103,9 +87,8 @@ export function withAuth(PageComponent) {
             pageProps = await PageComponent.getInitialProps(ctx, ctx.apolloClient);
         }
 
-
         if (apolloClient) {
-            const { data: { myUser } } = await apolloClient.query({ query: CARDS_QUERY });
+            const { data: { myUser } } = await apolloClient.query({ query: MY_USER_QUERY });
 
             if (!myUser) {
                 redirect({ ctx, where: config.app.redirectUrl });

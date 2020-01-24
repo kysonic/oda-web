@@ -34,7 +34,7 @@ export default function TextField({ fieldType, name, label, placeholder, value =
                     onBlur={() => setFocused(false)}
                 />
             </InputGroup>
-            {error && (<FormText className="c-text-field__error" color="danger">{error.map((message) => translate(message)).join('')}</FormText>)}
+            {error && (<FormText className="c-text-field__error text-center" color="danger">{error.map((message) => translate(message)).join('')}</FormText>)}
         </FormGroup>
     );
 }

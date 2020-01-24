@@ -1,19 +1,8 @@
 import React from 'react';
 import * as classNames from 'classnames';
 import { ClassNameType } from 'globals';
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-
-export const CARDS_QUERY = gql`
-    query allCards {
-        cards {
-            id
-            title
-            description
-            image
-        }
-    }
-`;
+import { CARDS_QUERY } from '@graphql/card';
 
 export type CardsPropsType = {} & ClassNameType;
 
