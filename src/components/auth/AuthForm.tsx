@@ -10,14 +10,14 @@ import './AuthForm.scss';
 export type AuthFormPropsType = {} & ClassNameType;
 
 const MAP_SLIDE_INDEX_TO_RIGHT_CONTROL_TITLE = ['DO_NOT_HAVE_ACCOUNT_YET', 'RETURN_TO_SING_IN', 'RETURN_TO_SING_IN'];
-const MAP_MAP_SLIDE_INDEX_TO_FORM_TITLE = ['AUTHORIZATION', 'REGISTRATION', 'FORGOT_PASSWORD'];
+const MAP_SLIDE_INDEX_TO_FORM_TITLE = ['AUTHORIZATION', 'REGISTRATION', 'FORGOT_PASSWORD'];
 
 export default function AuthForm({ className }: AuthFormPropsType) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
         <div className={classNames('c-auth-form d-flex flex-column align-items-center justify-content-between', className)}>
-            <h1 className="c-auth-form__title font-weight-bold text-center">{translate(MAP_MAP_SLIDE_INDEX_TO_FORM_TITLE[activeIndex])}</h1>
+            <h1 className="c-auth-form__title font-weight-bold text-center">{translate(MAP_SLIDE_INDEX_TO_FORM_TITLE[activeIndex])}</h1>
             <Carousel activeIndex={activeIndex} className={`c-auth-form__carousel c-auth-form__carousel--active-${activeIndex}`}>
                 <LoginPasswordForm key="sign-in-form" mode="signIn" className="c-auth-form__form" />
                 <LoginPasswordForm key="sign-up-form" mode="signUp" className="c-auth-form__form" />
