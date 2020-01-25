@@ -30,7 +30,6 @@ const RESTORE_PASSWORD_FORM_FIELDS: FieldsType = {
 };
 
 export default function ForgotPasswordForm({ className }) {
-
     const [restorePassword, { loading, error }] = useMutation(FORGOT_PASSWORD_MUTATION);
 
     const submitProps = {
@@ -45,7 +44,7 @@ export default function ForgotPasswordForm({ className }) {
     const [errors] = useApolloErrors(error);
 
     return (
-        <div className={classNames('c-login-password-form', className)}>
+        <div className={classNames('c-login-password-form', 'd-flex', 'flex-column', 'justify-content-around', className)}>
             <p className="c-forgot-password-form__description">{translate('RESTORE_PASSWORD_DESCRIPTION')}</p>
             <FormFactory
                 className="c-login-password-form__form"

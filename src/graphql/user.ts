@@ -39,4 +39,4 @@ export const FORGOT_PASSWORD_MUTATION = gql`
             details,
         }
     }
-`
+`;
