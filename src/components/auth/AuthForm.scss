@@ -35,5 +35,12 @@ $auth-form-forgot-password-margin-top-xs: 24px;
       margin-top: $auth-form-forgot-password-margin-top-xs;
     }
   }
+
+  .c-auth-form__actions {
+    width: 385px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
