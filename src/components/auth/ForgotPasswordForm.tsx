@@ -4,9 +4,10 @@ import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
 import { translate } from '@i18n/index';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
-import { LOGIN_MUTATION } from '@graphql/user';
+import { FORGOT_PASSWORD_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
-import { redirect } from '@services/next';
+
+import './ForgotPasswordForm.scss';
 
 export type onSubmitArgsType = {
     email: FieldType;
@@ -28,33 +29,24 @@ const RESTORE_PASSWORD_FORM_FIELDS: FieldsType = {
     },
 };
 
-export default function RestorePasswordForm({ className }) {
-    const client: ApolloClientType<any> = useApolloClient();
+export default function ForgotPasswordForm({ className }) {
 
-    // const [restorePassword, { loading, error }] = useMutation(LOGIN_MUTATION, {
-    //     onCompleted({ login: { token } }) {
-    //         document.cookie = `token=${token}; path=/`;
-    //         client.writeData({ data: { isLoggedIn: true } });
-    //         redirect({ where: '/cards' });
-    //         // TODO: Cache user query
-    //     },
-    // });
-    const loading = false;
+    const [restorePassword, { loading, error }] = useMutation(FORGOT_PASSWORD_MUTATION);
 
     const submitProps = {
-        caption: translate(!loading ? 'SIGN_IN' : 'LOADING...'),
+        caption: translate(!loading ? 'RESTORE_PASSWORD_SUBMIT' : 'LOADING...'),
         className: 'btn-gradient',
     };
 
-    const onSubmit = ({ email }: onSubmitArgsType) => {
-        // restorePassword(email);
+    const onSubmit = ({ email: { value } }: onSubmitArgsType) => {
+        restorePassword({ variables: { email: value } });
     };
 
-    const errors = {};
-    // const [errors] = useApolloErrors(error);
+    const [errors] = useApolloErrors(error);
 
     return (
         <div className={classNames('c-login-password-form', className)}>
+            <p className="c-forgot-password-form__description">{translate('RESTORE_PASSWORD_DESCRIPTION')}</p>
             <FormFactory
                 className="c-login-password-form__form"
                 fields={RESTORE_PASSWORD_FORM_FIELDS}
