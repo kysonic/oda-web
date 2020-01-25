@@ -17,4 +17,5 @@ export default {
     NO_SUCH_USER_FOUND: 'Пользователь не найден',
     DO_NOT_HAVE_ACCOUNT_YET: 'Регистрация',
     RETURN_TO_SING_IN: 'Назад',
+    'A_UNIQUE_CONSTRAINT_WOULD_BE_VIOLATED_ON_USER._DETAILS:_FIELD_NAME_=_EMAIL': 'Email уже занят',
 };
