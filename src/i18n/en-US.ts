@@ -17,4 +17,5 @@ export default {
     NO_SUCH_USER_FOUND: 'No such user found',
     DO_NOT_HAVE_ACCOUNT_YET: 'Don\'t have account yet?',
     RETURN_TO_SING_IN: 'Back to sign in',
+    PASSWORDS_MUST_MATCH: 'Passwords must match',
 };

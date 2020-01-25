@@ -17,4 +17,5 @@ export default {
     NO_SUCH_USER_FOUND: 'Пользователь не найден',
     DO_NOT_HAVE_ACCOUNT_YET: 'Регистрация',
     RETURN_TO_SING_IN: 'Назад',
+    PASSWORDS_MUST_MATCH: 'Пароли должны совпадать',
 };
