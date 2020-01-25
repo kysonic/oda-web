@@ -38,7 +38,7 @@ export default function useForm(initialState: FieldsType, submitCallback?: useCa
         setErrors({});
 
         try {
-            const normalized = Object.entries(formData).reduce((acc, [key, value]) => {
+            const normalized = Object.entries(formData).reduce((acc, [key, value]: [string, any]) => {
                 acc[key] = value.value;
                 return acc;
             }, {});
