@@ -6,12 +6,10 @@ $auth-form-controls-margin-top: 44px;
 $auth-form-controls-margin-top-xs: 24px;
 $auth-form-max-width: 385px;
 $auth-form-min-width: 272px;
-$auth-form-max-height-0: 320px;
-$auth-form-max-height-1: 276px;
 $auth-form-box-shadow: $box-shadow-popup;
 $auth-form-border-radius: 8px;
 
-.c-auth-form {
+.c-auth-card {
   padding: 24px;
 
   &__title {
@@ -22,35 +20,18 @@ $auth-form-border-radius: 8px;
     }
   }
 
-  &__carousel {
-    width: 100%;
-    height: 100vh;
+  &__form {
     max-width: $auth-form-max-width;
     min-width: $auth-form-min-width;
     box-shadow: $auth-form-box-shadow;
     border-radius: $auth-form-border-radius;
     margin-top: $auth-form-margin-top;
-    transition: max-height .3s ease-out;
-
-    &--active {
-      &-0 {
-        max-height: $auth-form-max-height-0;
-      }
-
-      &-1 {
-        max-height: $auth-form-max-height-1;
-      }
-    }
 
     @include media-breakpoint-down(sm) {
       margin-top: $auth-form-margin-top-xs;
     }
   }
 
-  &__form {
-    box-shadow: none;
-    background: transparent;
-  }
 
   &__controls {
     width: 100%;

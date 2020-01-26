@@ -5,7 +5,7 @@ export default {
     ALL_RIGHTS_RESERVED: 'Все права защищены.',
     FORGOT_PASSWORD: 'Забыли пароль?',
     SIGN_IN: 'Войти',
-    SIGN_UP: 'Зарегистрироваться',
+    SIGN_UP: 'Отправить',
     EMAIL: 'Email',
     PASSWORD: 'Пароль',
     REMEMBER_ME: 'Запомнить меня',

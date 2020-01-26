@@ -40,8 +40,10 @@ const SIGNUP_FORM_FIELDS: FieldsType = {
     }),
 };
 
+export type LoginPasswordFormModeType = 'signIn' | 'signUp';
+
 export type LoginPasswordFormPropsType = {
-    mode?: 'signIn' | 'signUp';
+    mode?: LoginPasswordFormModeType;
 } & ClassNameType;
 
 export type onSubmitArgsType = {

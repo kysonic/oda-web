@@ -9,8 +9,8 @@ const CONTROLS = [
         caption: 'FORGOT_PASSWORD',
     },
     {
-        link: '/registration',
-        caption: 'DO_NOT_HAVE_ACCOUNT_YET',
+        link: '/login',
+        caption: 'RETURN_TO_SING_IN',
     },
 ];
 
@@ -19,8 +19,8 @@ function LoginPage() {
         <AuthLayout className="p-login d-flex flex-column align-items-center justify-content-center">
             <AuthCard
                 className="p-login__auth-card"
-                title="AUTHORIZATION"
-                mode="signIn"
+                title="REGISTRATION"
+                mode="signUp"
                 controls={CONTROLS}
             />
         </AuthLayout>
