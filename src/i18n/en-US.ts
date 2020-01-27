@@ -1,5 +1,6 @@
 export default {
-    AUTHORIZATION: 'Authorization',
+    AUTHORIZATION: 'Sign in',
+    REGISTRATION: 'Sign up',
     COPYRIGHT: 'Copyright ©',
     ALL_RIGHTS_RESERVED: 'All rights reserved',
     FORGOT_PASSWORD: 'Forgot password?',
@@ -14,6 +15,9 @@ export default {
     'LOADING...': 'Loading...',
     INVALID_PASSWORD: 'Invalid password',
     NO_SUCH_USER_FOUND: 'No such user found',
+    DO_NOT_HAVE_ACCOUNT_YET: 'Don\'t have account yet?',
+    RETURN_TO_SING_IN: 'Back to sign in',
+    'A_UNIQUE_CONSTRAINT_WOULD_BE_VIOLATED_ON_USER._DETAILS:_FIELD_NAME_=_EMAIL': 'Email is already taken',
     PASSWORDS_MUST_MATCH: 'Passwords must match',
     RESTORE_PASSWORD: 'Forgot password?',
     RESTORE_PASSWORD_SUBMIT: 'Restore',

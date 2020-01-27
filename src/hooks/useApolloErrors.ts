@@ -6,6 +6,7 @@ const GRAPHQL_ERROR_PREFIX = 'GraphQL error:';
 const DEFAULT_ERROR_MAPPER = {
     INVALID_PASSWORD: 'password',
     NO_SUCH_USER_FOUND: 'email',
+    'A_UNIQUE_CONSTRAINT_WOULD_BE_VIOLATED_ON_USER._DETAILS:_FIELD_NAME_=_EMAIL': 'email',
 };
 
 // Use apollo errors should be compatible with ./components/form/Form.tsx

@@ -1,10 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
-import { FieldType, useCallbackType } from 'globals';
-import { buildValidationSchema } from '@services/form-validation';
-
-export type FormConfigType = {
-    [key: string]: FieldType;
-}
+import { FieldsType, useCallbackType } from 'globals';
+import { buildValidationSchema } from '@services/form';
 
 export type errorsType = {
     [key: string]: Array<string>;
@@ -18,9 +14,9 @@ function getValueByType(type, { value, checked }) {
     return value;
 }
 
-export type useFormReturnType = [FormConfigType, useCallbackType, useCallbackType, errorsType];
+export type useFormReturnType = [FieldsType, useCallbackType, useCallbackType, errorsType, Function];
 
-export default function useForm(initialState: FormConfigType, submitCallback?: useCallbackType): useFormReturnType {
+export default function useForm(initialState: FieldsType, submitCallback?: useCallbackType): useFormReturnType {
     const [formData, setFormData] = useState(initialState);
     const validationSchema = useMemo(() => buildValidationSchema(initialState), [initialState]);
     const [errors, setErrors] = useState({});
@@ -42,7 +38,7 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         setErrors({});
 
         try {
-            const normalized = Object.entries(formData).reduce((acc, [key, value]) => {
+            const normalized = Object.entries(formData).reduce((acc, [key, value]: [string, any]) => {
                 acc[key] = value.value;
                 return acc;
             }, {});
@@ -76,5 +72,5 @@ export default function useForm(initialState: FormConfigType, submitCallback?: u
         }
     }, [formData]);
 
-    return [formData, onChange, onSubmit, errors];
+    return [formData, onChange, onSubmit, errors, setErrors];
 }

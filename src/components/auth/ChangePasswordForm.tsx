@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
 import { FieldsType, ApolloClientType, ClassNameType } from 'globals';
@@ -6,7 +6,9 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { CHANGE_PASSWORD_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
 import { translate } from '@i18n/index';
+import useFrom from '@hooks/useForm';
 
+import './FormCommon.scss';
 
 const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
     password: {
@@ -40,8 +42,6 @@ export default function ChangePasswordForm({ className }: ChangePasswordFormProp
     const client: ApolloClientType<any> = useApolloClient();
     const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION);
 
-    const [errors] = useApolloErrors(error);
-
     const onSubmit = ({ token, password }) => {
         console.log('Submit', token, password);
         changePassword({
@@ -52,19 +52,29 @@ export default function ChangePasswordForm({ className }: ChangePasswordFormProp
         });
     };
 
+    const [formData, onChange, handleSubmit, errors, setErrors] = useFrom(CHANGE_PASSWORD_FORM_FIELDS, onSubmit);
+
+    const [apolloErrors] = useApolloErrors(error);
+
+    useEffect(() => {
+        setErrors(apolloErrors);
+    }, [apolloErrors]);
+
     const submitProps = {
         caption: translate(!loading ? 'CHANGE_PASSWORD' : 'LOADING...'),
         className: 'btn-gradient',
     };
 
     return (
-        <div className={classNames('c-login-password-form', 'd-flex', 'flex-column', 'justify-content-around', className)}>
+        <div className={classNames('c-auth-form', 'd-flex', 'flex-column', 'justify-content-around', className)}>
             <FormFactory
-                className="c-login-password-form__form"
+                className="c-auth-form__form"
+                formData={formData}
+                onChange={onChange}
+                handleSubmit={handleSubmit}
+                errors={errors}
                 fields={CHANGE_PASSWORD_FORM_FIELDS}
                 submitProps={submitProps}
-                onSubmit={onSubmit}
-                externalErrors={errors}
             />
         </div>
     );
