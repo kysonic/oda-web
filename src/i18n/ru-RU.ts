@@ -19,4 +19,7 @@ export default {
     RETURN_TO_SING_IN: 'Назад',
     'A_UNIQUE_CONSTRAINT_WOULD_BE_VIOLATED_ON_USER._DETAILS:_FIELD_NAME_=_EMAIL': 'Email уже занят',
     PASSWORDS_MUST_MATCH: 'Пароли должны совпадать',
+    RESTORE_PASSWORD: 'Забыли пароль?',
+    RESTORE_PASSWORD_SUBMIT: 'Восстановить',
+    RESTORE_PASSWORD_DESCRIPTION: 'Введите адрес от вашего аккаунта, на который придет пароль',
 };

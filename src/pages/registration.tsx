@@ -2,6 +2,7 @@ import React from 'react';
 import AuthLayout from '@components/layouts/auth/AuthLayout';
 import AuthCard from '@components/auth/AuthCard';
 import { withApollo } from '@services/next-apollo';
+import LoginPasswordForm from '@components/auth/LoginPasswordForm';
 
 const CONTROLS = [
     {
@@ -14,17 +15,19 @@ const CONTROLS = [
     },
 ];
 
-function LoginPage() {
+function RegistrationPage() {
     return (
-        <AuthLayout className="p-login d-flex flex-column align-items-center justify-content-center">
+        <AuthLayout className="p-registration d-flex flex-column align-items-center justify-content-center">
             <AuthCard
-                className="p-login__auth-card"
+                className="p-registration__auth-card"
                 title="REGISTRATION"
-                mode="signUp"
                 controls={CONTROLS}
-            />
+                controlsClassName="d-flex justify-content-between align-items-center flex-column flex-sm-row"
+            >
+                <LoginPasswordForm mode="signUp" className="p-registration__form c-auth-card__form" />
+            </AuthCard>
         </AuthLayout>
     );
 }
 
-export default withApollo(LoginPage);
+export default withApollo(RegistrationPage);

@@ -41,3 +41,13 @@ export const SIGNUP_MUTATION = gql`
         }
     }
 `;
+
+export const FORGOT_PASSWORD_MUTATION = gql`
+    mutation forgetUserEmail($email: String!) {
+        forgetUserEmail(email: $email) {
+            success,
+            message,
+            details,
+        }
+    }
+`;

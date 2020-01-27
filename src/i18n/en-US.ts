@@ -19,4 +19,7 @@ export default {
     RETURN_TO_SING_IN: 'Back to sign in',
     'A_UNIQUE_CONSTRAINT_WOULD_BE_VIOLATED_ON_USER._DETAILS:_FIELD_NAME_=_EMAIL': 'Email is already taken',
     PASSWORDS_MUST_MATCH: 'Passwords must match',
+    RESTORE_PASSWORD: 'Forgot password?',
+    RESTORE_PASSWORD_SUBMIT: 'Restore',
+    RESTORE_PASSWORD_DESCRIPTION: 'Enter the address from your account',
 };
