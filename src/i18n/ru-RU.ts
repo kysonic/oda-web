@@ -15,4 +15,7 @@ export default {
     INVALID_PASSWORD: 'Пароль не верный',
     NO_SUCH_USER_FOUND: 'Пользователь не найден',
     PASSWORDS_MUST_MATCH: 'Пароли должны совпадать',
+    RESTORE_PASSWORD: 'Забыли пароль?',
+    RESTORE_PASSWORD_SUBMIT: 'Восстановить',
+    RESTORE_PASSWORD_DESCRIPTION: 'Введите адрес от вашего аккаунта, на который придет пароль',
 };

@@ -1,9 +1,12 @@
-$auth-form-title-size: 52px;
+@import "authVars";
+
+$auth-form-title-size: 44px;
 $auth-form-title-size-xs: 26px;
-$auth-form-margin-top: 60px;
+$auth-form-margin-top: 50px;
 $auth-form-margin-top-xs: 24px;
 $auth-form-forgot-password-margin-top: 44px;
 $auth-form-forgot-password-margin-top-xs: 24px;
+$auth-form-forgot-password-max-width: $auth-content-max-width;
 
 .c-auth-form {
   padding: 24px;
@@ -26,10 +29,15 @@ $auth-form-forgot-password-margin-top-xs: 24px;
 
   &__forgot-password {
     margin-top: $auth-form-forgot-password-margin-top;
+    max-width: $auth-form-forgot-password-max-width;
 
     @include media-breakpoint-down(sm) {
       margin-top: $auth-form-forgot-password-margin-top-xs;
     }
+  }
+
+  .c-auth-form__actions {
+    width: $auth-content-max-width;
   }
 }
 
