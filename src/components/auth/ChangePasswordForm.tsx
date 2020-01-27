@@ -7,6 +7,8 @@ import { CHANGE_PASSWORD_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
 import { translate } from '@i18n/index';
 import useFrom from '@hooks/useForm';
+import { useRouter } from 'next/router';
+import { redirect } from '@services/next';
 
 import './FormCommon.scss';
 
@@ -15,7 +17,7 @@ const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
         type: 'text',
         name: 'password',
         fieldType: 'password',
-        placeholder: 'ENTER_YOUR_PASSWORD',
+        placeholder: 'ENTER_NEW_PASSWORD',
         validation: 'password',
         required: true,
         className: 'input-group--rounded',
@@ -24,7 +26,7 @@ const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
         type: 'text',
         name: 'confirmPassword',
         fieldType: 'password',
-        placeholder: 'CONFIRM_YOUR_PASSWORD',
+        placeholder: 'CONFIRM_NEW_PASSWORD',
         validation: 'confirmPassword',
         required: true,
         className: 'input-group--rounded',
@@ -38,15 +40,17 @@ export type onSubmitArgsType = {
     password: string;
 }
 
-export default function ChangePasswordForm({ className }: ChangePasswordFormPropsType) {
+function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
     const client: ApolloClientType<any> = useApolloClient();
+    const router = useRouter();
+    const { token } = router.query;
+
     const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION);
 
-    const onSubmit = ({ token, password }) => {
-        console.log('Submit', token, password);
+    const onSubmit = ({ password }) => {
         changePassword({
             variables: {
-                token: token.value,
+                token,
                 password: password.value,
             },
         });
@@ -59,6 +63,10 @@ export default function ChangePasswordForm({ className }: ChangePasswordFormProp
     useEffect(() => {
         setErrors(apolloErrors);
     }, [apolloErrors]);
+
+    if (!token) {
+        redirect({ where: '/login' });
+    }
 
     const submitProps = {
         caption: translate(!loading ? 'CHANGE_PASSWORD' : 'LOADING...'),
@@ -79,3 +87,10 @@ export default function ChangePasswordForm({ className }: ChangePasswordFormProp
         </div>
     );
 }
+
+// ChangePasswordForm.getInitialProps = ({ query }) => {
+//     console.log('>>', query);
+//     return { query };
+// };
+
+export default ChangePasswordForm;

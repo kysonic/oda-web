@@ -22,4 +22,7 @@ export default {
     RESTORE_PASSWORD: 'Забыли пароль?',
     RESTORE_PASSWORD_SUBMIT: 'Восстановить',
     RESTORE_PASSWORD_DESCRIPTION: 'Введите адрес от вашего аккаунта, на который придет пароль',
+    ENTER_NEW_PASSWORD: 'Введите новый пароль',
+    CONFIRM_NEW_PASSWORD: 'Подтвердите новый пароль',
+    CHANGE_PASSWORD: 'Изменить пароль',
 };

@@ -22,4 +22,7 @@ export default {
     RESTORE_PASSWORD: 'Forgot password?',
     RESTORE_PASSWORD_SUBMIT: 'Restore',
     RESTORE_PASSWORD_DESCRIPTION: 'Enter the address from your account',
+    ENTER_NEW_PASSWORD: 'Enter new password',
+    CONFIRM_NEW_PASSWORD: 'Confirm new password',
+    CHANGE_PASSWORD: 'Change password',
 };
