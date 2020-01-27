@@ -36,6 +36,15 @@ $auth-form-forgot-password-max-width: $auth-content-max-width;
     }
   }
 
+  &__change-password {
+    margin-top: $auth-form-forgot-password-margin-top;
+    max-width: $auth-form-forgot-password-max-width;
+
+    @include media-breakpoint-down(sm) {
+      margin-top: $auth-form-forgot-password-margin-top-xs;
+    }
+  }
+
   .c-auth-form__actions {
     width: $auth-content-max-width;
   }
