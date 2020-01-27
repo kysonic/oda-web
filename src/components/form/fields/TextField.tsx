@@ -6,7 +6,7 @@ import * as classNames from 'classnames';
 
 type TextFieldPropsType = {} & FieldType;
 
-export default function TextField({ fieldType, name, label, placeholder, value = '', onChange, error, className, icon, attrs = {} }: TextFieldPropsType) {
+export default function TextField({ fieldType, name, label, placeholder, value = '', defaultValue, onChange, error, className, icon, attrs = {} }: TextFieldPropsType) {
     const [focused, setFocused] = useState(false);
 
     return (
@@ -27,6 +27,7 @@ export default function TextField({ fieldType, name, label, placeholder, value =
                     name={name}
                     placeholder={translate(placeholder)}
                     value={value}
+                    defaultValue={defaultValue}
                     onChange={onChange}
                     invalid={!!error}
                     {...attrs}

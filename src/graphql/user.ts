@@ -31,6 +31,17 @@ export const LOGIN_MUTATION = gql`
     }
 `;
 
+export const SIGNUP_MUTATION = gql`
+    mutation Signup($email: String!, $password: String!) {
+        signup(email: $email, password: $password, data: {name: ""}) {
+            token
+            user {
+                ${USER_FIELDS}
+            }
+        }
+    }
+`;
+
 export const FORGOT_PASSWORD_MUTATION = gql`
     mutation forgetUserEmail($email: String!) {
         forgetUserEmail(email: $email) {

@@ -10,24 +10,24 @@ const CONTROLS = [
         caption: 'FORGOT_PASSWORD',
     },
     {
-        link: '/registration',
-        caption: 'DO_NOT_HAVE_ACCOUNT_YET',
+        link: '/login',
+        caption: 'RETURN_TO_SING_IN',
     },
 ];
 
-function LoginPage() {
+function RegistrationPage() {
     return (
-        <AuthLayout className="p-login d-flex flex-column align-items-center justify-content-center">
+        <AuthLayout className="p-registration d-flex flex-column align-items-center justify-content-center">
             <AuthCard
-                className="p-login__auth-card"
-                title="AUTHORIZATION"
+                className="p-registration__auth-card"
+                title="REGISTRATION"
                 controls={CONTROLS}
                 controlsClassName="d-flex justify-content-between align-items-center flex-column flex-sm-row"
             >
-                <LoginPasswordForm mode="signIn" className="p-login__form c-auth-card__form" />
+                <LoginPasswordForm mode="signUp" className="p-registration__form c-auth-card__form" />
             </AuthCard>
         </AuthLayout>
     );
 }
 
-export default withApollo(LoginPage);
+export default withApollo(RegistrationPage);
