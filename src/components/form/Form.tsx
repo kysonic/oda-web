@@ -28,6 +28,19 @@ export type FormPropsType = {
     ref?: RefObject<HTMLElement>;
 } & ClassNameType;
 
+/**
+ * Form Factory ties with useForm hooks, all hook handlers should be passed as props
+ * @param formData - useForm prop
+ * @param handleSubmit  - useForm prop
+ * @param onChange  - useForm prop
+ * @param errors - useForm prop
+ * @param fields - form fields, same as for useForm
+ * @param ref - forwarded ref
+ * @param submitProps - submit button cusomizations
+ * @param className - classes
+ * @constructor
+ */
+
 export default function FormFactory({
     formData,
     handleSubmit,
