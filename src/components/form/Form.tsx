@@ -40,6 +40,7 @@ export default function FormFactory({
 }: FormPropsType) {
     return (
         <Form innerRef={ref} className={classNames('c-form', className)} onSubmit={handleSubmit}>
+            {errors.common && (<div className="c-form__error text-center mb-2 cl-danger">{translate(errors.common)}</div>)}
             {Object.entries(fields).map(([key, field]: [string, FieldType]) => (
                 <Field
                     className="c-form__field"

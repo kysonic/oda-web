@@ -40,12 +40,23 @@ export type onSubmitArgsType = {
     password: string;
 }
 
-function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
-    const client: ApolloClientType<any> = useApolloClient();
+function ChangePasswordForm({ className }: ChangePasswordFormPropsType) {
     const router = useRouter();
     const { token } = router.query;
 
-    const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION);
+    if (!token) {
+        redirect({ where: '/login' });
+    }
+
+    const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION, {
+        onCompleted(response) {
+            const { changeUserPassword: { success } } = response;
+
+            if (success) {
+                redirect({ where: '/login' });
+            }
+        },
+    });
 
     const onSubmit = ({ password }) => {
         changePassword({
@@ -63,10 +74,6 @@ function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
     useEffect(() => {
         setErrors(apolloErrors);
     }, [apolloErrors]);
-
-    if (!token) {
-        redirect({ where: '/login' });
-    }
 
     const submitProps = {
         caption: translate(!loading ? 'CHANGE_PASSWORD' : 'LOADING...'),
@@ -87,10 +94,5 @@ function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
         </div>
     );
 }
-
-// ChangePasswordForm.getInitialProps = ({ query }) => {
-//     console.log('>>', query);
-//     return { query };
-// };
 
 export default ChangePasswordForm;

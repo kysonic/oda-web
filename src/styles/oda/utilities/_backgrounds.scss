@@ -25,6 +25,11 @@ section {
     @include bg-gradient-variant(".bg-gradient-#{$color}", $value);
 }
 
+@each $color, $value in $theme-colors {
+  .cl-#{$color}  {
+    color: $value;
+  }
+}
 
 // Shape (svg) fill colors
 @each $color, $value in $theme-colors {
