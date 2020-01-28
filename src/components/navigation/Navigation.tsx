@@ -34,7 +34,7 @@ export function NavigationItemWrapper({ href, children }: NavigationItemWrapperP
     );
 }
 
-export function NavigationItem({ className, href, title, icon = 'air-baloon', onClick }: NavigationItemPropsType) {
+export function NavigationItem({ className, href, title, icon = 'education-outline_flask', onClick }: NavigationItemPropsType) {
     return (
         <NavItem className={classNames('c-navigation-item', className)}>
             <NavigationItemWrapper href={href}>
@@ -78,8 +78,17 @@ export type NavigationPropsType = {} & ClassNameType;
 export default function Navigation({ className }: NavigationPropsType) {
     return (
         <Nav className={classNames('c-navigation align-items-lg-center', className)} navbar>
-            <NavigationItem className="c-navigation__item" href="/page1" title="Page1" />
-            <NavigationItemDropdown className="c-navigation__item c-navigation__item--dropdown" title="Dropdown">
+            <NavigationItem
+                className="c-navigation__item"
+                href="/page1"
+                title="Page1"
+                icon="sport-outline_user-climb"
+            />
+            <NavigationItemDropdown
+                className="c-navigation__item c-navigation__item--dropdown"
+                title="Dropdown"
+                icon="sport-outline_user-meditation"
+            >
                 <NavigationItem className="c-navigation__item" href="/page2" title="Page2" />
                 <NavigationItem className="c-navigation__item" href="/page3" title="Page3" />
             </NavigationItemDropdown>

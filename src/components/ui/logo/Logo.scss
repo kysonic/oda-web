@@ -7,6 +7,11 @@ $logo-height-xs: 26px;
   width: $logo-width;
   height: $logo-height;
 
+  & > svg {
+    width: 100%;
+    height: 100%;
+  }
+
   @include media-breakpoint-down(sm) {
     width: $logo-width-xs;
     height: $logo-height-xs;
