@@ -20,7 +20,7 @@ function ForgotPasswordPage() {
                 controls={CONTROLS}
                 controlsClassName="d-flex justify-content-center align-items-center flex-column flex-sm-row"
             >
-                <ForgotPasswordForm className="p-forgot-password__form c-auth-card__form" />
+                <ForgotPasswordForm className="c-auth-card__form" />
             </AuthCard>
         </AuthLayout>
     );

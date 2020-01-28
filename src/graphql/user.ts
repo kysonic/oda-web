@@ -51,3 +51,12 @@ export const FORGOT_PASSWORD_MUTATION = gql`
         }
     }
 `;
+
+export const CHANGE_PASSWORD_MUTATION = gql`
+    mutation changeUserPassword($token: String!, $password: String!) {
+        changeUserPassword(token: $token, password: $password) {
+            success,
+            message
+        }
+    }
+`;

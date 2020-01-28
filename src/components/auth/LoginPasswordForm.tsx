@@ -11,7 +11,7 @@ import { redirect } from '@services/next';
 import { emailFieldFactory, passwordFieldFactory, rememberMeFieldFactory } from '@services/form';
 import { DateTime } from 'luxon';
 
-import './LoginPasswordForm.scss';
+import './FormCommon.scss';
 
 const LOGIN_FORM_FIELDS: FieldsType = {
     email: emailFieldFactory({
@@ -97,9 +97,9 @@ export default function LoginPasswordForm({ className, mode = 'signIn' }: LoginP
     };
 
     return (
-        <div className={classNames('c-login-password-form', className)}>
+        <div className={classNames('c-auth-form', className)}>
             <FormFactory
-                className="c-login-password-form__form"
+                className="c-auth-form__form"
                 formData={formData}
                 onChange={onChange}
                 handleSubmit={handleSubmit}
