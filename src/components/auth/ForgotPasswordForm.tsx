@@ -9,7 +9,7 @@ import useApolloErrors from '@hooks/useApolloErrors';
 import { emailFieldFactory } from '@services/form';
 import useFrom from '@hooks/useForm';
 
-import './FormCommon.scss';
+import './ForgotPasswordForm.scss';
 
 export type onSubmitArgsType = {
     email: FieldType;
@@ -44,10 +44,10 @@ export default function ForgotPasswordForm({ className }) {
     }, [apolloErrors]);
 
     return (
-        <div className={classNames('c-auth-form d-flex flex-column justify-content-around', className)}>
-            <p className="c-auth-form__description">{translate('RESTORE_PASSWORD_DESCRIPTION')}</p>
+        <div className={classNames('c-forgot-password-form d-flex flex-column justify-content-around', className)}>
+            <p className="c-forgot-password-form__description">{translate('RESTORE_PASSWORD_DESCRIPTION')}</p>
             <FormFactory
-                className="c-auth-form__form"
+                className="c-forgot-password-form__form"
                 formData={formData}
                 onChange={onChange}
                 handleSubmit={handleSubmit}
