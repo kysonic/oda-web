@@ -9,28 +9,18 @@ import { translate } from '@i18n/index';
 import useFrom from '@hooks/useForm';
 import { useRouter } from 'next/router';
 import { redirect } from '@services/next';
+import { passwordFieldFactory } from '@services/form';
 
 import './ChangePasswordForm.scss';
 
 const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
-    password: {
-        type: 'text',
-        name: 'password',
-        fieldType: 'password',
+    password: passwordFieldFactory({
         placeholder: 'ENTER_NEW_PASSWORD',
-        validation: 'password',
-        required: true,
-        className: 'input-group--rounded',
-    },
-    confirmPassword: {
-        type: 'text',
-        name: 'confirmPassword',
-        fieldType: 'password',
+    }),
+    confirmPassword: passwordFieldFactory({
         placeholder: 'CONFIRM_NEW_PASSWORD',
         validation: 'confirmPassword',
-        required: true,
-        className: 'input-group--rounded',
-    },
+    }),
 };
 
 type ChangePasswordFormPropsType = {} & ClassNameType;

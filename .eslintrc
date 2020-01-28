@@ -32,6 +32,7 @@
     "object-curly-newline": 0,
     "no-param-reassign": 0,
     "prefer-arrow-callback": 0,
+    "react/no-array-index-key": 0,
     "comma-dangle": ["error", {
       "arrays": "always-multiline",
       "objects": "always-multiline",
