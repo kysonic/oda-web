@@ -28,6 +28,19 @@ export type FormPropsType = {
     ref?: RefObject<HTMLElement>;
 } & ClassNameType;
 
+/**
+ * Form Factory ties with useForm hooks, all hook handlers should be passed as props
+ * @param formData - useForm prop
+ * @param handleSubmit  - useForm prop
+ * @param onChange  - useForm prop
+ * @param errors - useForm prop
+ * @param fields - form fields, same as for useForm
+ * @param ref - forwarded ref
+ * @param submitProps - submit button cusomizations
+ * @param className - classes
+ * @constructor
+ */
+
 export default function FormFactory({
     formData,
     handleSubmit,
@@ -40,10 +53,11 @@ export default function FormFactory({
 }: FormPropsType) {
     return (
         <Form innerRef={ref} className={classNames('c-form', className)} onSubmit={handleSubmit}>
-            {Object.entries(fields).map(([key, field]: [string, FieldType]) => (
+            {errors.common && (<div className="c-form__error text-center mb-2 cl-danger">{translate(errors.common)}</div>)}
+            {Object.entries(fields).map(([key, field]: [string, FieldType], index) => (
                 <Field
                     className="c-form__field"
-                    key={`${field.type}-${field.name}`}
+                    key={`${field.type}-${field.name}-${index}`}
                     defaultValue={fields[field.name].value}
                     value={formData[field.name]?.value}
                     error={errors[field.name]}

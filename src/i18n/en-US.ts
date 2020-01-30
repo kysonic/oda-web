@@ -25,4 +25,5 @@ export default {
     ENTER_NEW_PASSWORD: 'Enter new password',
     CONFIRM_NEW_PASSWORD: 'Confirm new password',
     CHANGE_PASSWORD: 'Change password',
+    INVALID_TOKEN: 'Token is invalid',
 };

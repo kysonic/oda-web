@@ -25,4 +25,5 @@ export default {
     ENTER_NEW_PASSWORD: 'Введите новый пароль',
     CONFIRM_NEW_PASSWORD: 'Подтвердите новый пароль',
     CHANGE_PASSWORD: 'Изменить пароль',
+    INVALID_TOKEN: 'Не верный токен',
 };

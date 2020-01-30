@@ -1,36 +1,26 @@
 import React, { useEffect } from 'react';
 import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
-import { FieldsType, ApolloClientType, ClassNameType } from 'globals';
-import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import { FieldsType, ClassNameType } from 'globals';
+import { useMutation } from '@apollo/react-hooks';
 import { CHANGE_PASSWORD_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
 import { translate } from '@i18n/index';
 import useFrom from '@hooks/useForm';
 import { useRouter } from 'next/router';
 import { redirect } from '@services/next';
+import { passwordFieldFactory } from '@services/form';
 
-import './FormCommon.scss';
+import './ChangePasswordForm.scss';
 
 const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
-    password: {
-        type: 'text',
-        name: 'password',
-        fieldType: 'password',
+    password: passwordFieldFactory({
         placeholder: 'ENTER_NEW_PASSWORD',
-        validation: 'password',
-        required: true,
-        className: 'input-group--rounded',
-    },
-    confirmPassword: {
-        type: 'text',
-        name: 'confirmPassword',
-        fieldType: 'password',
+    }),
+    confirmPassword: passwordFieldFactory({
         placeholder: 'CONFIRM_NEW_PASSWORD',
         validation: 'confirmPassword',
-        required: true,
-        className: 'input-group--rounded',
-    },
+    }),
 };
 
 type ChangePasswordFormPropsType = {} & ClassNameType;
@@ -40,12 +30,23 @@ export type onSubmitArgsType = {
     password: string;
 }
 
-function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
-    const client: ApolloClientType<any> = useApolloClient();
+function ChangePasswordForm({ className }: ChangePasswordFormPropsType) {
     const router = useRouter();
     const { token } = router.query;
 
-    const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION);
+    if (!token) {
+        redirect({ where: '/login' });
+    }
+
+    const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION, {
+        onCompleted(response) {
+            const { changeUserPassword: { success } } = response;
+
+            if (success) {
+                redirect({ where: '/login' });
+            }
+        },
+    });
 
     const onSubmit = ({ password }) => {
         changePassword({
@@ -64,19 +65,15 @@ function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
         setErrors(apolloErrors);
     }, [apolloErrors]);
 
-    if (!token) {
-        redirect({ where: '/login' });
-    }
-
     const submitProps = {
         caption: translate(!loading ? 'CHANGE_PASSWORD' : 'LOADING...'),
         className: 'btn-gradient',
     };
 
     return (
-        <div className={classNames('c-auth-form', 'd-flex', 'flex-column', 'justify-content-around', className)}>
+        <div className={classNames('c-change-password-form', 'd-flex', 'flex-column', 'justify-content-around', className)}>
             <FormFactory
-                className="c-auth-form__form"
+                className="c-change-password-form__form"
                 formData={formData}
                 onChange={onChange}
                 handleSubmit={handleSubmit}
@@ -87,10 +84,5 @@ function ChangePasswordForm({ url, className }: ChangePasswordFormPropsType) {
         </div>
     );
 }
-
-// ChangePasswordForm.getInitialProps = ({ query }) => {
-//     console.log('>>', query);
-//     return { query };
-// };
 
 export default ChangePasswordForm;
