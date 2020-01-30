@@ -35,7 +35,7 @@ export default function Header({ className }: HeaderPropsType) {
         <Row className={classNames('c-header', className)}>
             <Col className="c-header__col">
                 <Navbar className="c-header__navbar navbar-main navbar-light" expand="lg">
-                    <Logo className="c-header__logo" />
+                    <Logo className="c-header__logo d-flex align-items-center justify-content-center" />
                     <button type="button" className="c-header__burger navbar-toggler" id="toggler">
                         <i className="ni ni-bold-down" />
                     </button>
