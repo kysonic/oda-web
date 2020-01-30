@@ -2,7 +2,7 @@ import React from 'react';
 import AuthLayout from '@components/layouts/auth/AuthLayout';
 import { withApollo } from '@services/next-apollo';
 import AuthCard from '@components/auth/cards/AuthCard';
-import ForgotPasswordForm from '@components/auth/forms/ForgotPasswordForm/ForgotPasswordForm';
+import ApproveEmailForm from '@components/auth/forms/ApproveEmailForm/ApproveEmailForm';
 
 const CONTROLS = [
     {
@@ -11,19 +11,19 @@ const CONTROLS = [
     },
 ];
 
-function ForgotPasswordPage() {
+function ApproveEmailPage() {
     return (
-        <AuthLayout className="p-forgot-password d-flex flex-column align-items-center justify-content-center">
+        <AuthLayout className="p-approve-password d-flex flex-column align-items-center justify-content-center">
             <AuthCard
-                className="p-forgot-password__auth-card"
-                title="RESTORE_PASSWORD"
+                className="p-approve-password__auth-card"
+                title="APPROVE_EMAIL"
                 controls={CONTROLS}
                 controlsClassName="d-flex justify-content-center align-items-center flex-column flex-sm-row"
             >
-                <ForgotPasswordForm className="c-auth-card__form" />
+                <ApproveEmailForm className="c-auth-card__form" />
             </AuthCard>
         </AuthLayout>
     );
 }
 
-export default withApollo(ForgotPasswordPage);
+export default withApollo(ApproveEmailPage);

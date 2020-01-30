@@ -14,14 +14,21 @@ function getValueByType(type, { value, checked }) {
     return value;
 }
 
-export type useFormReturnType = [FieldsType, useCallbackType, useCallbackType, errorsType, Function];
+export type useFormReturnType = {
+    formData: FieldsType;
+    handleChange: useCallbackType;
+    handleSubmit: useCallbackType;
+    errors: errorsType;
+    setErrors: Function;
+    setFormData: Function;
+};
 
 export default function useForm(initialState: FieldsType, submitCallback?: useCallbackType): useFormReturnType {
     const [formData, setFormData] = useState(initialState);
     const validationSchema = useMemo(() => buildValidationSchema(initialState), [initialState]);
     const [errors, setErrors] = useState({});
 
-    const onChange = useCallback((event) => {
+    const handleChange = useCallback((event) => {
         const { name, value, type, checked } = event.target;
         const inputValue = getValueByType(type, { value, checked });
 
@@ -62,7 +69,7 @@ export default function useForm(initialState: FieldsType, submitCallback?: useCa
         }
     };
 
-    const onSubmit = useCallback(async (event) => {
+    const handleSubmit = useCallback(async (event) => {
         event.preventDefault();
 
         const isFormValid = await isValid();
@@ -72,5 +79,5 @@ export default function useForm(initialState: FieldsType, submitCallback?: useCa
         }
     }, [formData]);
 
-    return [formData, onChange, onSubmit, errors, setErrors];
+    return { formData, handleChange, handleSubmit, errors, setErrors, setFormData };
 }

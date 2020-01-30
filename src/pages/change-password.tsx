@@ -1,8 +1,8 @@
 import React from 'react';
 import AuthLayout from '@components/layouts/auth/AuthLayout';
 import { withApollo } from '@services/next-apollo';
-import AuthCard from '@components/auth/AuthCard';
-import ChangePasswordForm from '@components/auth/ChangePasswordForm';
+import AuthCard from '@components/auth/cards/AuthCard';
+import ChangePasswordForm from '@components/auth/forms/ChangePasswordForm/ChangePasswordForm';
 
 function ChangePasswordPage() {
     return (

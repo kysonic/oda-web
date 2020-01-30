@@ -6,6 +6,7 @@ export default {
     FORGOT_PASSWORD: 'Forgot password?',
     SIGN_IN: 'Sign in',
     SIGN_UP: 'Sign up',
+    SEND: 'Send',
     EMAIL: 'Email',
     PASSWORD: 'Password',
     REMEMBER_ME: 'Remember me',
@@ -26,4 +27,7 @@ export default {
     CONFIRM_NEW_PASSWORD: 'Confirm new password',
     CHANGE_PASSWORD: 'Change password',
     INVALID_TOKEN: 'Token is invalid',
+    APPROVE_EMAIL: 'Approve Email',
+    APPROVE_EMAIL_DESCRIPTION: 'Click "Send" button to approve your email address',
+    'NOT_AUTHORISED!': 'Not authorized',
 };

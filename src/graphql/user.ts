@@ -60,3 +60,12 @@ export const CHANGE_PASSWORD_MUTATION = gql`
         }
     }
 `;
+
+export const APPROVE_EMAIL_MUTATION = gql`
+    mutation approveUserEmail($token: String!) {
+        approveUserEmail(token: $token) {
+            success,
+            message
+        }
+    }
+`;

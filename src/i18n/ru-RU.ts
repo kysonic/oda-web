@@ -6,6 +6,7 @@ export default {
     FORGOT_PASSWORD: 'Забыли пароль?',
     SIGN_IN: 'Войти',
     SIGN_UP: 'Отправить',
+    SEND: 'Отправить',
     EMAIL: 'Email',
     PASSWORD: 'Пароль',
     REMEMBER_ME: 'Запомнить меня',
@@ -26,4 +27,7 @@ export default {
     CONFIRM_NEW_PASSWORD: 'Подтвердите новый пароль',
     CHANGE_PASSWORD: 'Изменить пароль',
     INVALID_TOKEN: 'Не верный токен',
+    APPROVE_EMAIL: 'Подтвердить Email',
+    APPROVE_EMAIL_DESCRIPTION: 'Нажмите на кнопку "Отправить", чтобы подтвердить email',
+    'NOT_AUTHORISED!': 'Нет авторизации',
 };
