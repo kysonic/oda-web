@@ -1,10 +1,14 @@
 import React from 'react';
-import { NextPage } from 'next';
+import DefaultLayout from '@components/layouts/default/DefaultLayout';
+import Cards from '@components/cards/Cards';
+import { withApollo, withAuth } from '@services/next-apollo';
 
-const Home: NextPage = () => (
-    <>
-        Home Page!
-    </>
-);
+function ChangePasswordPage() {
+    return (
+        <DefaultLayout>
+            <Cards />
+        </DefaultLayout>
+    );
+}
 
-export default Home;
+export default withApollo(withAuth(ChangePasswordPage));

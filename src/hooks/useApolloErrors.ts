@@ -9,8 +9,6 @@ const DEFAULT_ERROR_MAPPER = {
     'A_UNIQUE_CONSTRAINT_WOULD_BE_VIOLATED_ON_USER._DETAILS:_FIELD_NAME_=_EMAIL': 'email',
 };
 
-// Use apollo errors should be compatible with ./components/form/Form.tsx
-
 export default function useApolloErrors(error, errorMapper = DEFAULT_ERROR_MAPPER) {
     const [errors, setErrors] = useState({});
 
@@ -25,5 +23,5 @@ export default function useApolloErrors(error, errorMapper = DEFAULT_ERROR_MAPPE
         }
     }, [error]);
 
-    return [errors];
+    return { errors };
 }

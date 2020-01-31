@@ -1,7 +1,7 @@
 import React from 'react';
 import { UncontrolledCollapse, Navbar, Row, Col } from 'reactstrap';
 import Navigation from '@components/navigation/Navigation';
-import UserMenu from '@components/auth/UserMenu';
+import UserMenu from '@components/auth/menus/UserMenu';
 import * as classNames from 'classnames';
 import { ClassNameType } from 'globals';
 import Logo from '@components/ui/logo/Logo';

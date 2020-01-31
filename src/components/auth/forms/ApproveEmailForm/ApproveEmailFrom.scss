@@ -1,0 +1,12 @@
+$approve-email-form-title-size: 14px;
+$approve-email-form-description-color: $gray-600;
+
+.c-approve-email-form {
+  @include auth-form();
+
+  &__description {
+    text-align: center;
+    font-size: $approve-email-form-title-size;
+    color: $approve-email-form-description-color;
+  }
+}

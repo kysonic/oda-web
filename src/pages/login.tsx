@@ -1,8 +1,8 @@
 import React from 'react';
 import AuthLayout from '@components/layouts/auth/AuthLayout';
-import AuthCard from '@components/auth/AuthCard';
+import AuthCard from '@components/auth/cards/AuthCard';
 import { withApollo } from '@services/next-apollo';
-import LoginPasswordForm from '@components/auth/LoginPasswordForm';
+import SignInForm from '@components/auth/forms/SignInForm/SignInForm';
 
 const CONTROLS = [
     {
@@ -24,7 +24,7 @@ function LoginPage() {
                 controls={CONTROLS}
                 controlsClassName="d-flex justify-content-between align-items-center flex-column flex-sm-row"
             >
-                <LoginPasswordForm mode="signIn" className="p-login__form c-auth-card__form" />
+                <SignInForm className="p-login__form c-auth-card__form" />
             </AuthCard>
         </AuthLayout>
     );
