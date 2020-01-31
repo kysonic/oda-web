@@ -30,4 +30,5 @@ export default {
     APPROVE_EMAIL: 'Approve Email',
     APPROVE_EMAIL_DESCRIPTION: 'Click "Send" button to approve your email address',
     'NOT_AUTHORISED!': 'Not authorized',
+    DONE: 'Готово',
 };

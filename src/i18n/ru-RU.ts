@@ -30,4 +30,5 @@ export default {
     APPROVE_EMAIL: 'Подтвердить Email',
     APPROVE_EMAIL_DESCRIPTION: 'Нажмите на кнопку "Отправить", чтобы подтвердить email',
     'NOT_AUTHORISED!': 'Нет авторизации',
+    DONE: 'Готово',
 };

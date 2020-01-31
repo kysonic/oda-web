@@ -5,7 +5,7 @@ import { FieldsType, ClassNameType } from 'globals';
 import { useMutation } from '@apollo/react-hooks';
 import { CHANGE_PASSWORD_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
-import { translate } from '@i18n/index';
+import useFormButton from '@hooks/useFormButton';
 import { useRouter } from 'next/router';
 import { redirect } from '@services/next';
 import { passwordFieldFactory } from '@services/form';
@@ -26,11 +26,6 @@ const CHANGE_PASSWORD_FORM_FIELDS: FieldsType = {
 
 type ChangePasswordFormPropsType = {} & ClassNameType;
 
-export type onSubmitArgsType = {
-    token: string;
-    password: string;
-}
-
 function ChangePasswordForm({ className }: ChangePasswordFormPropsType) {
     const router = useRouter();
     const { token } = router.query;
@@ -42,10 +37,14 @@ function ChangePasswordForm({ className }: ChangePasswordFormPropsType) {
     const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD_MUTATION, {
         onCompleted({ changeUserPassword: { success } }) {
             if (success) {
-                redirect({ where: '/login' });
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                setDone(true);
             }
         },
     });
+
+    const onDone = () => redirect({ where: '/login' });
+    const { setDone, submitButtonProps } = useFormButton('CHANGE_PASSWORD', loading, onDone);
 
     const onSubmit = ({ password }) => {
         changePassword({
@@ -64,10 +63,7 @@ function ChangePasswordForm({ className }: ChangePasswordFormPropsType) {
                 className="c-change-password-form__form"
                 fields={CHANGE_PASSWORD_FORM_FIELDS}
                 extraErrors={errors}
-                submitButtonProps={{
-                    caption: translate(!loading ? 'CHANGE_PASSWORD' : 'LOADING...'),
-                    className: 'btn-gradient',
-                }}
+                submitButtonProps={submitButtonProps}
                 onSubmit={onSubmit}
             />
         </div>

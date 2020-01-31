@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
 import { APPROVE_EMAIL_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
+import useFormButton from '@hooks/useFormButton';
 import { ClassNameType } from 'globals';
 import { redirect } from '@services/next';
 
@@ -24,10 +25,14 @@ export default function ApproveEmailForm({ className }: ApproveEmailFormPropsTyp
     const [approveEmail, { loading, error }] = useMutation(APPROVE_EMAIL_MUTATION, {
         onCompleted({ approveUserEmail: { success } }) {
             if (success) {
-                redirect({ where: '/' });
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                setDone(true);
             }
         },
     });
+
+    const onDone = () => redirect({ where: '/' });
+    const { setDone, submitButtonProps } = useFormButton('SEND', loading, onDone);
 
     const onSubmit = () => {
         approveEmail({ variables: { token } });
@@ -41,10 +46,7 @@ export default function ApproveEmailForm({ className }: ApproveEmailFormPropsTyp
             <FormFactory
                 className="c-approve-email-form__form"
                 fields={[]}
-                submitButtonProps={{
-                    caption: translate(!loading ? 'SEND' : 'LOADING...'),
-                    className: 'btn-gradient',
-                }}
+                submitButtonProps={submitButtonProps}
                 onSubmit={onSubmit}
                 extraErrors={errors}
             />
