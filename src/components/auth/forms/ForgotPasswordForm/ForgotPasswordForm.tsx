@@ -7,6 +7,8 @@ import { useMutation } from '@apollo/react-hooks';
 import { FORGOT_PASSWORD_MUTATION } from '@graphql/user';
 import useApolloErrors from '@hooks/useApolloErrors';
 import { emailFieldFactory } from '@services/form';
+import { redirect } from '@services/next';
+import useFormButton from '@hooks/useFormButton';
 
 import './ForgotPasswordForm.scss';
 
@@ -27,7 +29,12 @@ export default function ForgotPasswordForm({ className }) {
 
     const onSubmit = ({ email: { value } }: onSubmitArgsType) => {
         restorePassword({ variables: { email: value } });
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setDone(true);
     };
+
+    const onDone = () => redirect({ where: '/login' });
+    const { setDone, submitButtonProps } = useFormButton('RESTORE_PASSWORD_SUBMIT', loading, onDone);
 
     const { errors } = useApolloErrors(error);
 
@@ -37,10 +44,7 @@ export default function ForgotPasswordForm({ className }) {
             <FormFactory
                 className="c-forgot-password-form__form"
                 fields={RESTORE_PASSWORD_FORM_FIELDS}
-                submitButtonProps={{
-                    caption: translate(!loading ? 'RESTORE_PASSWORD_SUBMIT' : 'LOADING...'),
-                    className: 'btn-gradient',
-                }}
+                submitButtonProps={submitButtonProps}
                 onSubmit={onSubmit}
                 extraErrors={errors}
             />

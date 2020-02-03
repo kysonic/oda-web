@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { ClassNameType, FieldsType, FieldType } from 'globals';
 import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
-import { translate } from '@i18n/index';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_MUTATION } from '@graphql/user';
-import { redirect } from '@services/next';
 import { emailFieldFactory, passwordFieldFactory, rememberMeFieldFactory } from '@services/form';
 import { DateTime } from 'luxon';
 import useApolloErrors from '@hooks/useApolloErrors';
+import useFormButton from '@hooks/useFormButton';
+import { redirect } from '@services/next';
 
 import './SignInForm.scss';
 
@@ -44,9 +44,16 @@ export default function SignInForm({ className }: SignInFormPropsType) {
             const token = login?.token;
             const dt = DateTime.local().plus({ [rememberMe ? 'days' : 'hours']: 3 });
             document.cookie = `token=${token}; path=/; expires=${dt.toJSDate()}`;
-            redirect({ where: '/' });
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            setDone(true);
         },
     });
+
+    const onDone = () => {
+        console.log('DOne');
+        redirect({ where: '/' });
+    };
+    const { setDone, submitButtonProps } = useFormButton('SIGN_IN', loading, onDone);
 
     const onSubmit = ({ email, password, rememberMe: { value } }: onSubmitArgsType) => {
         setRememberMe(value);
@@ -66,10 +73,7 @@ export default function SignInForm({ className }: SignInFormPropsType) {
             <FormFactory
                 className="c-sign-in-form__form"
                 fields={LOGIN_FORM_FIELDS}
-                submitButtonProps={{
-                    caption: translate(loading ? 'LOADING...' : 'SIGN_IN'),
-                    className: 'btn-gradient',
-                }}
+                submitButtonProps={submitButtonProps}
                 onSubmit={onSubmit}
                 extraErrors={errors}
             />

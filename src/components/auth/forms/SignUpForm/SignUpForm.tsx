@@ -2,13 +2,13 @@ import React from 'react';
 import { ClassNameType, FieldsType, FieldType } from 'globals';
 import * as classNames from 'classnames';
 import FormFactory from '@components/form/Form';
-import { translate } from '@i18n/index';
 import { useMutation } from '@apollo/react-hooks';
 import { SIGNUP_MUTATION } from '@graphql/user';
 import { redirect } from '@services/next';
 import { emailFieldFactory, passwordFieldFactory } from '@services/form';
 import { DateTime } from 'luxon';
 import useApolloErrors from '@hooks/useApolloErrors';
+import useFormButton from '@hooks/useFormButton';
 
 import './SignUpForm.scss';
 
@@ -40,9 +40,13 @@ export default function SignInForm({ className }: SignInFormPropsType) {
             const token = signup?.token;
             const dt = DateTime.local().plus({ hours: 3 });
             document.cookie = `token=${token}; path=/; expires=${dt.toJSDate()}`;
-            redirect({ where: '/' });
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            setDone(true);
         },
     });
+
+    const onDone = () => redirect({ where: '/' });
+    const { setDone, submitButtonProps } = useFormButton('SIGN_UP', loading, onDone);
 
     const onSubmit = ({ email, password }: onSubmitArgsType) => {
         action({
@@ -60,10 +64,7 @@ export default function SignInForm({ className }: SignInFormPropsType) {
             <FormFactory
                 className="c-sign-up-form__form"
                 fields={SIGNUP_FORM_FIELDS}
-                submitButtonProps={{
-                    caption: translate(loading ? 'LOADING...' : 'SIGN_IN'),
-                    className: 'btn-gradient',
-                }}
+                submitButtonProps={submitButtonProps}
                 onSubmit={onSubmit}
                 extraErrors={errors}
             />
